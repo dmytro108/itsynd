@@ -6,6 +6,7 @@
 ## Solution
 - **Check the [website](https://ec2-44-201-223-102.compute-1.amazonaws.com)**
 - **SFTP connection: `itsyndicate@44.201.223.102` Passw: `ITsyndicate45#`**
+- Comment loading module `ngx_http_geoip2_module.so`. This module is broken and blocks starting Nginx webserver.
 
 ### Task 1
 

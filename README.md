@@ -43,3 +43,32 @@ sudo service nginx restart
 ```
 
 ### Task 3
+
+1. Generate a self-signed SSL certificate:
+```
+sudo openssl req -x509 -newkey rsa:2048  -nodes  -days 365 \
+-keyout /etc/nginx/ssl/private.key \
+-out /etc/nginx/ssl/certificate.crt
+```
+follow the command's prompt to enter the neccessery data.
+
+2. Add redirection directive into HTTPP `server` block in  */etc/nginx/sites-enabled/default*
+```
+return 301 https://$host$request_uri;
+```
+3. Add HTTPS `server` block:
+```
+server {
+  listen 443 ssl;
+  server_name ec2-44-201-223-102.compute-1.amazonaws.com;
+  ssl_certificate /etc/nginx/ssl/certificate.crt;
+  ssl_certificate_key /etc/nginx/ssl/private.key;
+# Copy all the rest from HTTP server block
+...
+}
+```
+4. Restart NginX
+
+## Task 4
+
+

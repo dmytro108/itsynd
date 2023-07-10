@@ -32,7 +32,7 @@ sudo chmod 644 /etc/fstab
 
 ### Task 2
 
-1. Add `location` block into `server` defenition in *[/etc/nginx/sites-enabled/default]*(sites-enabled_default):
+1. Add `location` block into `server` defenition in *[/etc/nginx/sites-enabled/default](sites-enabled_default)*:
 ```
 location /static/ {
   proxy_pass http://its-test-public.s3-website-us-east-1.amazonaws.com/;
@@ -54,7 +54,7 @@ sudo openssl req -x509 -newkey rsa:2048  -nodes  -days 365 \
 ```
 follow the command's prompt to enter the neccessery data.
 
-2. Add redirection directive into HTTPP `server` block in  *[/etc/nginx/sites-enabled/default]*(sites-enabled_default)
+2. Add redirection directive into HTTPP `server` block in  *[/etc/nginx/sites-enabled/default](sites-enabled_default)*
 ```
 return 301 https://$host$request_uri;
 ```
@@ -105,7 +105,7 @@ sudo passwd itsyndicate
  sudo mount -o bind  /var/www/html/ ./html/
  sudo mount -o bind  /var/log/nginx/ ./logs/
 ```
-6. Edit *[/etc/ssh/sshd_config]*(sshd_config)
+6. Edit *[/etc/ssh/sshd_config](sshd_config)*
 ```
 PasswordAuthentication yes
 Subsystem       sftp    internal-sfp

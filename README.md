@@ -25,7 +25,9 @@ sudo swapon /swapfile1GB
 ```
 4. Make the swap file permanent
 ```
+sudo chmod 666 /etc/fstab
 sudo echo '/swapfile1GB none swap sw 0 0' >> /etc/fstab
+sudo chmod 644 /etc/fstab
 ```
 
 ### Task 2
@@ -68,7 +70,52 @@ server {
 }
 ```
 4. Restart NginX
+5. Add fierwall rule for port 443
+```
+sudo ufw allow 443
+sudo ufw status
+```
 
-## Task 4
+### Task 4
+
+1. Install the OpenSSH server
+2. Add SFTP user, group
+```
+sudo groupadd sftpusers
+sudo useradd -m -G sftpusers -s /usr/sbin/nologin itsyndicate
+sudo passwd itsyndicate
+```
+3. Prepare SFTP user directory
+```
+ cd /home/itsynducate
+ sudo mkdir html logs
+ sudo chown root:sftpusers html logs
+ sudo chmod 755 html logs
+```
+4. Set requires owner and permissions to the target dirs
+```
+ sudo chown -R root:sftpusers /var/log/nginx/
+ sudo chmod 755 /var/log/nginx/
+ sudo chown -R root:sftpusers /var/www/html/
+ sudo chmod 755 /var/www/html/
+```
+5. Mount target dirs */var/www/html* and */var/log/nginx* in to SFTP user home dir
+```
+ cd /home/itsynducate
+ sudo mount -o bind  /var/www/html/ ./html/
+ sudo mount -o bind  /var/log/nginx/ ./logs/
+```
+6. Edit */etc/ssh/sshd_config*
+```
+PasswordAuthentication yes
+Subsystem       sftp    internal-sfp
+Match Group sftpusers
+  ForceCommand internal-sftp
+  ChrootDirectory  /home/%u
+```                                     
+7. Reastart SSH
+```
+sudo service ssh restart
+```
 
 

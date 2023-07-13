@@ -6,7 +6,41 @@
 ## Solution
 - **Check the [website](https://ec2-44-202-246-183.compute-1.amazonaws.com)**
 - **SFTP connection: `itsyndicate@44.202.246.183` Passw: `Green45#`**
-- Comment loading module `ngx_http_geoip2_module.so`. This module is broken and blocks starting Nginx webserver.
+## Fix Nginx module
+The machine image contains broken Nginx module. Module *libnginx-mod-http-geoip2* can not be loaded. It should be reinstalled.
+1. Update all packages:
+```
+sudo apt-get update
+sudo apt-get upgrade
+'''
+2. Check the nginx
+```
+sudo systemctl status nginx
+```
+3. Remove the broken module *libnginx-mod-http-geoip2*:
+```
+sudo dpkg -r  --force-depends libnginx-mod-http-geoip2
+```
+4. Instal new module *libnginx-mod-http-geoip2*:
+```
+sudo add-apt-repository ppa:maxmind/ppa
+sudo apt update
+sudo apt upgrade
+```
+The package manager found out that module *libnginx-mod-http-geoip2* need to be installed:
+```
+sudo apt --fix-broken install
+```
+5. Check modules:
+```
+sudo dpkg -l | grep nginx
+```
+We can see module *libnginx-mod-http-geoip2* is OK.
+6. Start Nginx:
+```
+sudo systemctl start nginx
+sudo systemctl status nginx
+```
 
 ### Task 1
 

@@ -65,7 +65,7 @@ return 301 https://$host$request_uri;
 ```
 server {
   listen 443 ssl;
-  server_name ec2-44-201-223-102.compute-1.amazonaws.com;
+  server_name ec2-44-202-246-183.compute-1.amazonaws.com;
   ssl_certificate /etc/nginx/certificate.crt;
   ssl_certificate_key /etc/nginx/private.key;
 # Copy all the rest from HTTP server block

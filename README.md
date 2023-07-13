@@ -12,7 +12,7 @@ The machine image contains broken Nginx module. Module *libnginx-mod-http-geoip2
 ```
 sudo apt-get update
 sudo apt-get upgrade
-'''
+```
 2. Check the nginx
 ```
 sudo systemctl status nginx

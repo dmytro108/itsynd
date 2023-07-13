@@ -41,6 +41,10 @@ We can see module *libnginx-mod-http-geoip2* is OK.
 sudo systemctl start nginx
 sudo systemctl status nginx
 ```
+7. Remove default index.html which we have got after updates:
+```
+sudo rm /var/www/html/index.nginx-debian.html
+```
 
 ### Task 1
 

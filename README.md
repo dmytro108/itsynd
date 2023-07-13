@@ -102,7 +102,7 @@ server {
   server_name ec2-44-202-246-183.compute-1.amazonaws.com;
   ssl_certificate /etc/nginx/certificate.crt;
   ssl_certificate_key /etc/nginx/private.key;
-# Copy all the rest from HTTP server block
+// Copy all the rest from HTTP server block
 ...
 }
 ```
@@ -129,6 +129,8 @@ sudo passwd itsyndicate
  mkdir html logs
  chown root:sftpusers html logs
  chmod 755 html logs
+ chown root:sftpusers /home/itsyndicate/
+ chmod 755  /home/itsyndicate/  
  exit
 ```
 4. Set requires owner and permissions to the target dirs

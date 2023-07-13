@@ -49,11 +49,13 @@ sudo service nginx restart
 
 1. Generate a self-signed SSL certificate:
 ```
-sudo openssl req -x509 -newkey rsa:2048  -nodes  -days 365 \
--keyout /etc/nginx/ssl/private.key \
--out /etc/nginx/ssl/certificate.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt
 ```
 follow the command's prompt to enter the neccessery data.
+```
+sudo mv nginx.crt /etc/nginx/certificate.crt
+sudo mv nginx.key /etc/nginx/private.key
+```
 
 2. Add redirection directive into HTTPP `server` block in  *[/etc/nginx/sites-enabled/default](sites-enabled_default)*
 ```
@@ -64,8 +66,8 @@ return 301 https://$host$request_uri;
 server {
   listen 443 ssl;
   server_name ec2-44-201-223-102.compute-1.amazonaws.com;
-  ssl_certificate /etc/nginx/ssl/certificate.crt;
-  ssl_certificate_key /etc/nginx/ssl/private.key;
+  ssl_certificate /etc/nginx/certificate.crt;
+  ssl_certificate_key /etc/nginx/private.key;
 # Copy all the rest from HTTP server block
 ...
 }
@@ -88,10 +90,12 @@ sudo passwd itsyndicate
 ```
 3. Prepare SFTP user directory
 ```
- cd /home/itsynducate
- sudo mkdir html logs
- sudo chown root:sftpusers html logs
- sudo chmod 755 html logs
+ sudo -s
+ cd /home/itsyndicate
+ mkdir html logs
+ chown root:sftpusers html logs
+ chmod 755 html logs
+ exit
 ```
 4. Set requires owner and permissions to the target dirs
 ```
@@ -102,9 +106,11 @@ sudo passwd itsyndicate
 ```
 5. Mount target dirs */var/www/html* and */var/log/nginx* in to SFTP user home dir
 ```
- cd /home/itsynducate
+ sudo -s
+ cd /home/itsyndicate
  sudo mount -o bind  /var/www/html/ ./html/
  sudo mount -o bind  /var/log/nginx/ ./logs/
+ exit
 ```
 6. Edit *[/etc/ssh/sshd_config](sshd_config)*
 ```

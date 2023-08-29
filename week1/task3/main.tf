@@ -7,8 +7,8 @@ module "vpc" {
   name = "my-vpc-${count.index}"
   cidr = "10.${count.index}.0.0/16"
 
-  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  private_subnets = ["10.0.1.0/24"]
+  azs             = ["us-east-1a"]
+  private_subnets = ["10.${count.index}.1.0/24"]
   #public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 
   enable_nat_gateway = false
@@ -51,8 +51,8 @@ resource "aws_vpc_peering_connection" "peering2to3" {
 // ********************* EC2 instances
 resource "aws_instance" "web_server" {
     count                  = 3
-    ami                    = "ami-0e1c5be2aa956338b"
-    instance_type          = "t3.micro"
+    ami                    = "ami-051f7e7f6c2f40dc1"
+    instance_type          = "t2.micro"
     subnet_id              = module.vpc[count.index].private_subnets[0]
     vpc_security_group_ids = [module.vpc[count.index].default_security_group_id]
 

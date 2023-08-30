@@ -1,55 +1,6 @@
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "5.1.1"
 
-  count = 3
-
-  name = "my-vpc-${count.index}"
-  cidr = "10.${count.index}.0.0/16"
-
-  azs             = ["us-east-1a"]
-  private_subnets = ["10.${count.index}.1.0/24"]
-  #public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
-
-  enable_nat_gateway = false
-  enable_vpn_gateway = false
-
-  default_security_group_ingress = [{protocol  = "tcp"
-    from_port = 80
-    to_port   = 80
-    #cidr_blocks = [""]
-}]
-
-   default_security_group_egress = [{protocol  = "tcp"
-    from_port = 80
-    to_port   = 80
-    #cidr_blocks = ["0.0.0.0/0"]
-}]
-
-  tags = {
-    Terraform = "true"
-    Environment = "dev"
-  }
-}
-
-resource "aws_vpc_peering_connection" "peering1to2" {
-  peer_vpc_id          = module.vpc[1].vpc_id
-  vpc_id               = module.vpc[0].vpc_id
-  auto_accept          = true
-}
-resource "aws_vpc_peering_connection" "peering1to3" {
-  peer_vpc_id          = module.vpc[2].vpc_id
-  vpc_id               = module.vpc[0].vpc_id
-  auto_accept          = true
-}
-resource "aws_vpc_peering_connection" "peering2to3" {
-  peer_vpc_id          = module.vpc[2].vpc_id
-  vpc_id               = module.vpc[1].vpc_id
-  auto_accept          = true
-}
-
-// ********************* EC2 instances
-resource "aws_instance" "web_server" {
+# ********************* EC2 instances
+/* resource "aws_instance" "web_server" {
     count                  = 3
     ami                    = "ami-051f7e7f6c2f40dc1"
     instance_type          = "t2.micro"
@@ -67,3 +18,4 @@ resource "aws_instance" "web_server" {
         "Name"        = "web_server-${count.index}"
    }
 }
+ */

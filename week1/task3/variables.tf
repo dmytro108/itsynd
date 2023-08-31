@@ -71,12 +71,19 @@ variable "vpc_num" {
 
 }
 
-variable "subnet_num" {
+variable "private_subnet_num" {
   description = "Quantity of VPCs"
   type        = number
   default     = 0
 
 }
+variable "public_subnet_num" {
+  description = "Quantity of VPCs"
+  type        = number
+  default     = 0
+
+}
+
 variable "port_from" {
   description = "Remote port number for security group"
   type        = number
@@ -88,4 +95,9 @@ variable "port_to" {
   type        = number
   default     = 80
 
+}
+variable "controller_pub_key" {
+  description = "SSH publick key for access to controller host"
+  type        = string
+  default     = ""
 }

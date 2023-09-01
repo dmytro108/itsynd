@@ -4,16 +4,16 @@ output "public_ip" {
 }
 
 output "my-vpc" {
-  description = "VPC id"
-  value = data.aws_vpcs.my-vpc.ids
+  description = "List of VPC IDs"
+  value       = data.aws_vpcs.my-vpc.ids
 }
 
 output "privat_ips" {
-  description = "Control node publick IP address"
+  description = "List of EC2 instances private IPs"
   value       = data.aws_instances.nodes_list[*].private_ips
 }
 
- output "cidrs" {
-  description = "VPC CIDRs"
-  value = module.vpc[*].vpc_cidr_block
- }
+output "cidrs" {
+  description = "List of VPC CIDRs"
+  value       = module.vpc[*].vpc_cidr_block
+}

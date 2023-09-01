@@ -1,7 +1,7 @@
 variable "region" {
-  description = "AWS region"
+  description = "AWS region for all recources and providers"
   type        = string
-  default     = "eu-west-2"
+  default     = "us-east-1"
 }
 
 variable "vpc_name" {
@@ -17,19 +17,19 @@ variable "env_name" {
 }
 
 variable "vpc_cidr_prefix" {
-  description = "VPC CIDR"
+  description = "VPC CIDR base for calculating real VPC CIDRs"
   type        = string
   default     = "10.0.0.0/0"
 }
 
 variable "pub_net_cidr_prefix" {
-  description = "Public subnet CIDR"
+  description = "CIDR base for calculating real public subnet CIDRs"
   type        = string
   default     = "10.0.0.0/24"
 }
 
 variable "priv_net_cidr_prefix" {
-  description = "Privat subnet CIDR"
+  description = "CIDR  base for calculating real private subnet CIDRs"
   type        = string
   default     = "10.0.10.0/24"
 }
@@ -47,53 +47,79 @@ variable "aws_cli_profile" {
 }
 
 variable "ec2_ami_id" {
-  description = "AWS ami id"
+  description = "AWS AMI id for EC2 instances"
   type        = string
   default     = "ami-0e1c5be2aa956338b" //AWS Linux 2023 x86_64
 }
 
 variable "ec2_type" {
-  description = "AWS instance type"
+  description = "AWS EC2 instance type"
   type        = string
   default     = "t3.micro" // Free tier
 }
 
 variable "azs" {
-  description = "azs"
+  description = "AWS availability zones"
   type        = list(string)
-  default     = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
 variable "vpc_num" {
-  description = "Quantity of VPCs"
+  description = "Number of VPCs"
   type        = number
-  default     = 0
+  default     = 1
 
 }
 
 variable "private_subnet_num" {
-  description = "Quantity of VPCs"
+  description = "Number of private subnets in each VPC"
   type        = number
-  default     = 0
+  default     = 1
 
 }
 variable "public_subnet_num" {
-  description = "Quantity of VPCs"
+  description = "Number of public subnets in each VPC"
   type        = number
   default     = 0
 
 }
 
-variable "port_from" {
-  description = "Remote port number for security group"
+variable "ssh_port_from" {
+  description = "SSH remote port number for security group"
+  type        = number
+  default     = 22
+
+}
+variable "ssh_port_to" {
+  description = "SSH local port number for security group"
+  type        = number
+  default     = 22
+
+}
+
+variable "http_port_from" {
+  description = "HTTP remote port number for security group"
   type        = number
   default     = 80
 
 }
-variable "port_to" {
-  description = "Local port number for security group"
+variable "http_port_to" {
+  description = "HTTP local port number for security group"
   type        = number
   default     = 80
+
+}
+
+variable "https_port_from" {
+  description = "HTTPS remote port number for security group"
+  type        = number
+  default     = 443
+
+}
+variable "https_port_to" {
+  description = "HTTPS local port number for security group"
+  type        = number
+  default     = 443
 
 }
 variable "controller_pub_key" {

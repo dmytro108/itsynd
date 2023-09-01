@@ -22,40 +22,16 @@ variable "vpc_cidr_prefix" {
   default     = "10.0.0.0/0"
 }
 
-variable "pub_net_cidr_prefix" {
-  description = "CIDR base for calculating real public subnet CIDRs"
-  type        = string
-  default     = "10.0.0.0/24"
-}
-
-variable "priv_net_cidr_prefix" {
-  description = "CIDR  base for calculating real private subnet CIDRs"
-  type        = string
-  default     = "10.0.10.0/24"
-}
-
-variable "credential_path" {
-  description = "Path to credential file"
-  type        = string
-  default     = "$HOME/.aws/credentials"
-}
-
-variable "aws_cli_profile" {
-  description = "Profile name in AWS CLI credential and config file"
-  type        = string
-  default     = "default"
-}
-
 variable "ec2_ami_id" {
   description = "AWS AMI id for EC2 instances"
   type        = string
-  default     = "ami-0e1c5be2aa956338b" //AWS Linux 2023 x86_64
+  default     = "ami-0e1c5be2aa956338b" # AWS Linux 2023 x86_64
 }
 
 variable "ec2_type" {
   description = "AWS EC2 instance type"
   type        = string
-  default     = "t3.micro" // Free tier
+  default     = "t3.micro" # Free tier
 }
 
 variable "azs" {

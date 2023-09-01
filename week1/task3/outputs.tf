@@ -3,9 +3,9 @@ output "public_ip" {
   value       = aws_eip.controller.public_ip
 }
 
-output "my-vpc" {
+output "my_vpc" {
   description = "List of VPC IDs"
-  value       = data.aws_vpcs.my-vpc.ids
+  value       = data.aws_vpcs.my_vpc.ids
 }
 
 output "privat_ips" {

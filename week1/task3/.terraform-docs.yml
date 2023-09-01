@@ -1,33 +1,31 @@
-formatter: "markdown table" # this is required
+formatter: "markdown table"
 
 version: ""
 
-header-from: main.tf
+header-from: "docs/header.md"
 footer-from: ""
 
 recursive:
   enabled: false
-  path: modules
 
 sections:
-  hide: []
-  show: []
-
-  hide-all: false # deprecated in v0.13.0, removed in v0.15.0
-  show-all: true  # deprecated in v0.13.0, removed in v0.15.0
+  show:
+    - header
+    - providers
+    - resources
+    - requirements
+    - inputs
+    - outputs
 
 content: |-
   {{ .Header }}
-
-  ## Example
-
-  ```hcl
-  {{ include "examples/example-1/main.tf" }}
-  ```
-
+  {{ include "docs/task.md" }}
+  {{ include "docs/solution.md" }}
   {{ .Inputs }}
-
-  {{ .Outputs }}  
+  {{ .Outputs }}
+  {{ .Requirements }}
+  {{ .Providers }}
+  {{ .Resources }}
 
 output:
   file: "README.md"
@@ -36,7 +34,7 @@ output:
     <!-- BEGIN_TF_DOCS -->
     {{ .Content }}
     <!-- END_TF_DOCS -->
-  
+
 
 output-values:
   enabled: false
@@ -50,7 +48,7 @@ settings:
   anchor: true
   color: true
   default: true
-  description: false
+  description: true
   escape: true
   hide-empty: false
   html: true

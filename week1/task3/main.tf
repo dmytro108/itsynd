@@ -1,4 +1,3 @@
-
 # ********************* EC2 instances *******************************
 # Creates an EC2 instance in every created VPC in the private subnet.
 # An instance should allow inbound HTTP traffic

@@ -1,4 +1,3 @@
-### Screenshots
 #### Terraform commands
 ![Validating and plan](docs/2023-09-02_02h46_56.png)
 

@@ -68,6 +68,8 @@ resource "aws_route" "direct_privat" {
 }
 ```
 The whole code dedicated to the VPCs peering is in the file [peering.tf](peering.tf)
+#### Tools
+The code was checked with **tflint**, **tfsec** and **checkov**. The documentation was created with **terraform-docs**
 ### Reference
 #### Requirements
 
@@ -105,10 +107,10 @@ The whole code dedicated to the VPCs peering is in the file [peering.tf](peering
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cidrs"></a> [cidrs](#output\_cidrs) | List of VPC CIDRs |
 | <a name="output_my_vpc"></a> [my\_vpc](#output\_my\_vpc) | List of VPC IDs |
 | <a name="output_privat_ips"></a> [privat\_ips](#output\_privat\_ips) | List of EC2 instances private IPs |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | Control node publick IP address |
+| <a name="output_vpc_cidrs"></a> [vpc\_cidrs](#output\_vpc\_cidrs) | List of VPC CIDRs |
 #### Resources
 
 | Name | Type |
@@ -127,4 +129,21 @@ The whole code dedicated to the VPCs peering is in the file [peering.tf](peering
 | [aws_security_group_rule.https_egress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.ssh_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_vpc_peering_connection.peering](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_peering_connection) | resource |
+### Results
+#### Terraform commands
+![Validating and plan](docs/2023-09-02_02h46_56.png)
+
+![Applying configuration](docs/2023-09-02_02h48_12.png)
+
+![Outputs and SSH login to controller node](docs/2023-09-02_02h49_25.png)
+
+![Testing peeering connections](docs/2023-09-02_02h49_43.png)
+
+#### AWS console
+![EC2 Instances](docs/2023-09-02_02h54_53.png)
+![Peering connections](docs/2023-09-02_02h57_12.png)
+![Route tables](docs/2023-09-02_02h59_59.png)
+![A route to peered VPCs](docs/2023-09-02_03h00_32.png)
+![Inbound rules](week1/task3/docs/2023-09-02_03h04_30.png)
+![Outbound rules](week1/task3/docs/2023-09-02_03h04_45.png)
 <!-- END_TF_DOCS -->

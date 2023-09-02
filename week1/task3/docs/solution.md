@@ -58,3 +58,5 @@ resource "aws_route" "direct_privat" {
 }
 ```
 The whole code dedicated to the VPCs peering is in the file [peering.tf](peering.tf)
+#### Tools
+The code was checked with **tflint**, **tfsec** and **checkov**. The documentation was created with **terraform-docs**

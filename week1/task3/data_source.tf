@@ -8,6 +8,7 @@ data "aws_instances" "nodes_list" {
     name   = "tag:Name"
     values = [for i in range(var.vpc_num) : "web_server_${i}"]
   }
+  depends_on = [aws_instance.web_server]
 }
 
 # List of created VPCs
@@ -16,4 +17,5 @@ data "aws_vpcs" "my_vpc" {
     name   = "tag:Environment"
     values = [var.env_name]
   }
+  depends_on = [ module.vpc ]
 }

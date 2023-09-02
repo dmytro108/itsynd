@@ -10,10 +10,10 @@ output "my_vpc" {
 
 output "privat_ips" {
   description = "List of EC2 instances private IPs"
-  value       = data.aws_instances.nodes_list[*].private_ips
+  value       = data.aws_instances.nodes_list.private_ips
 }
 
-output "cidrs" {
+output "vpc_cidrs" {
   description = "List of VPC CIDRs"
   value       = module.vpc[*].vpc_cidr_block
 }

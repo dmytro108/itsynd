@@ -12,5 +12,5 @@
 ![Peering connections](docs/2023-09-02_02h57_12.png)
 ![Route tables](docs/2023-09-02_02h59_59.png)
 ![A route to peered VPCs](docs/2023-09-02_03h00_32.png)
-![Inbound rules](week1/task3/docs/2023-09-02_03h04_30.png)
-![Outbound rules](week1/task3/docs/2023-09-02_03h04_45.png)
+![Inbound rules](docs/2023-09-02_03h04_30.png)
+![Outbound rules](docs/2023-09-02_03h04_45.png)

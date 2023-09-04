@@ -98,8 +98,8 @@ variable "https_port_to" {
   default     = 443
 
 }
-variable "controller_pub_key" {
-  description = "SSH publick key for access to controller host"
+variable "bastion_pub_key" {
+  description = "SSH publick key for access to bastion host"
   type        = string
   default     = ""
 }

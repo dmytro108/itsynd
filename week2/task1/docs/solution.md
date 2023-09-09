@@ -43,4 +43,3 @@ Alarms are configured with a minimum response period - one threshold value per 1
 **CloudWatch alarms**
 ![CloudWatch alarms](docs/alarms.png)
 ---
->>>>>>> 4237a32 (readme update with screenshots subs)

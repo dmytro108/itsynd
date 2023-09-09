@@ -1,7 +1,6 @@
-#### Workload tests results
 I ran two tests - one stress test and a load test. The stress test simulated a situation where the number of users is growing very quickly - 1 new user every second.
 
-##### Test 1 - Stress test
+#### Test 1 - Stress test
 | Test conditions| |
 |---------------|-----|
 | maximum users | 500 |
@@ -34,9 +33,14 @@ Even though the response time dropped to normal when the maximum number of concu
 ![Dashboard test 1](docs/Dashboard1.png)
 ---
 
-##### Test 2 - Load test
+#### Test 2 - Load test
 The conditions of this test are much softer, new users appear 5 times slower - one new user every 5 seconds.
 As you can see from the chart, the problematic range from the last test was passed with dignity - the response time was no more than 2.6s
+| Test conditions| |
+|---------------|-----|
+| maximum users | 500 |
+|---------------|-----|
+| New user spawn taime | 0.2s |
 
 **Load test Chart**
 ![Test chart 2](docs/test2.png)

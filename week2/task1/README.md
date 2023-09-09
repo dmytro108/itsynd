@@ -65,7 +65,8 @@ Alarms are configured with a minimum response period - one threshold value per 1
 I ran two tests - one stress test and a load test. The stress test simulated a situation where the number of users is growing very quickly - 1 new user every second.
 
 ##### Test 1 - Stress test
-Test conditions:
+| Test conditions| |
+|---------------|-----|
 | maximum users | 500 |
 |---------------|-----|
 | New user spawn taime | 1s |
@@ -85,6 +86,9 @@ Auto Scaling policies:
 |CPU 40%|add 2 instances| remove 1 instance|
 |CPU 50%|add 2 instances| remove 1 instance|
 
+The load test failed, as seen in the chart in range from 250 concurrent users up to 400 concurrent users, the response time was unacceptably high up to 40s.
+Even though the response time dropped to normal when the maximum number of concurrent users reached 500, the auto scaling group was unable to add instances on time. As you can see on the CloudWatch dashboard screenshot, at some point there is not a single instance that meets the healthcheck conditions.
+
 **Load test Chart**
 ![Test chart 1](docs/test1.png)
 ---
@@ -94,6 +98,9 @@ Auto Scaling policies:
 ---
 
 ##### Test 2 - Load test
+The conditions of this test are much softer, new users appear 5 times slower - one new user every 5 seconds.
+As you can see from the chart, the problematic range from the last test was passed with dignity - the response time was no more than 2.6s
+
 **Load test Chart**
 ![Test chart 2](docs/test2.png)
 ---

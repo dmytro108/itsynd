@@ -27,7 +27,6 @@ I ran two tests - one stress test and a load test. The stress test simulated a s
 | Test conditions| |
 |---------------|-----|
 | maximum users | 500 |
-|---------------|-----|
 | New user spawn taime | 1s |
 
 Auto Scaling group:
@@ -62,7 +61,6 @@ As you can see from the chart, the problematic range from the last test was pass
 | Test conditions| |
 |---------------|-----|
 | maximum users | 500 |
-|---------------|-----|
 | New user spawn taime | 0.2s |
 
 **Load test Chart**

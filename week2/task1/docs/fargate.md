@@ -10,20 +10,16 @@
 ![ECR](ecr_fg2.png)
 ---
 
-**Container**
-![Container](container_fg.png)
----
-
-**Container**
-![Container](container_fg1.png)
----
-
 **Task defenition**
 ![Task defenition](task_def_fg.png)
 ---
 
-**Task defenition**
+**Task defenition container**
 ![Task defenition](task_def_fg2.png)
+---
+
+**Container**
+![Container](container_fg.png)
 ---
 
 **Webservice**

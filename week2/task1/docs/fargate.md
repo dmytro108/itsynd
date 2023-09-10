@@ -2,12 +2,20 @@
 
 #### AWS console screenshots
 
+**ECR repository**
+![ECR](ecr_fg.png)
+---
+
+**ECR container image**
+![ECR](ecr_fg2.png)
+---
+
 **Container**
 ![Container](container_fg.png)
 ---
 
 **Container**
-![Container](container_fg2.png)
+![Container](container_fg1.png)
 ---
 
 **Task defenition**
@@ -32,12 +40,4 @@
 
 **Network Load Balancer**
 ![Network Load Balancer](nlb_fg3.png)
----
-
-**ECR**
-![ECR](ecr_fg.png)
----
-
-**ECR**
-![ECR](ecr_fg2.png)
 ---

@@ -2,7 +2,7 @@ from locust import HttpUser, task, between
 
 class QuickstartUser(HttpUser):
     wait_time = between(1, 3)
-    #base_url = "http://webservernlb-17a7db5621347e26.elb.us-east-1.amazonaws.com"
+ 
     @task(3)
     def SimplePages(self):
         self.client.get("/")

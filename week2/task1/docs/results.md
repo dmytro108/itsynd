@@ -1,4 +1,19 @@
 I ran two tests - one stress test and a load test. The stress test simulated a situation where the number of users is growing very quickly - 1 new user every second.
+Each test thread emulates a user navigating multiple application routes. Simple pages that do not require CPU load are called approximately 3 times more often than pages that require calculations.
+Test script code snippet:
+```python
+@task(3)
+   def SimplePages(self):
+      self.client.get("/")
+      self.client.get("/tools")
+      self.client.cookies.clear()
+
+@task
+   def LoadPages(self):
+      self.client.get("/tools/load")
+      self.client.get("/tools/gc")
+      self.client.cookies.clear()
+```
 
 #### Test 1 - Stress test
 | Test conditions| |

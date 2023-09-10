@@ -1,3 +1,4 @@
+I implemented bot approaches - deploy a demo web app as a container to EC2 withs Auto Scaling Group and deploy to ECS Fargate sevrice.
 
 #### Solution 1. Deployment app container to EC2
 In this solution, I deploy containers with the test application on EC2 instances in an autoscaling group placed into two private subnets across two availability zones. A network balancer is used to balance requests. I didn't use the application balancer because of the test application is a monolith and there is no way to effectively distribute the load along different routes. I decided that using an application balancer would not provide any benefit. The design also includes a bastion host for secure access to instances running containers.

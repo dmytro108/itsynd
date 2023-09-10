@@ -98,7 +98,9 @@ As you can see from the chart, the problematic range from the last test was pass
 
 #### Test 3 - Stress test of ECS Fargate
 The conditions of this test are the same as EC2 ASG stress test.
-As you can see from the chart, the problematic range from the last test was passed with dignity - the response time was no more than 2.6s
+As you can see from the graph (two consecutive tests on the graph), the problematic range from the EC2 ASG stress test was passed better. The maximum response time was 12s versus 40s for the EC2 solution, although I also consider this result to be unacceptable.
+The CloudWatch dashboard also shows that the start of new tasks with containers is much faster.
+
 | Test conditions| |
 |---------------|-----|
 | maximum users | 500 |

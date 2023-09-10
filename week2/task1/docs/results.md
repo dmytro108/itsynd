@@ -1,3 +1,6 @@
+The test node.js web app: [Node.js demo](https://github.com/benc-uk/nodejs-demoapp)
+The Load test tool: [Locust.io](https://locust.io/)
+
 I ran two tests - one stress test and a load test. The stress test simulated a situation where the number of users is growing very quickly - 1 new user every second.
 Each test thread emulates a user navigating multiple application routes. Simple pages that do not require CPU load are called approximately 3 times more often than pages that require calculations.
 Test script code snippet:

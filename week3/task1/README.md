@@ -16,7 +16,7 @@ Docker configured through EC2 user data. The infrastructure should include:
 
 **Bonus Task**: For those who complete the task quickly, use Terraform to set up email notifications for scaling events using CloudWatch and SNS.
 ### Solution
-This solution utilizes a range of terraform modules from A. Babonko:
+This solution utilizes a range of terraform modules from A. Babenko:
  - [vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
  - [autoscaling](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest)
  - [security-group](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/latest)

@@ -6,21 +6,22 @@
 Imagine you're a DevOps engineer at a growing startup. The company has recently developed a
 new application and wants to leverage AWS for hosting the application. They need to set up and
 manage the infrastructure Your task involves:
-1. Using Terraform, describe the infrastructure for the application from the previous task
+ 1. Using Terraform, describe the infrastructure for the application from the previous task
 https://github.com/benc-uk/nodejs-demoapp
-2. Set up and configure an EC2 Auto Scaling group, where the application will be run using
+ 2. Set up and configure an EC2 Auto Scaling group, where the application will be run using
 Docker configured through EC2 user data. The infrastructure should include:
-- Network and security groups
-- EC2 Auto Scaling group (you can use this module for reference or implementation: erraform-aws-modules/autoscaling/aws)
-- Load balancer and target group
-__Bonus Task__: For those who complete the task quickly, use Terraform to set up email notifications for scaling events using CloudWatch and SNS.
+ - Network and security groups
+ - EC2 Auto Scaling group (you can use this module for reference or implementation: erraform-aws-modules/autoscaling/aws)
+ - Load balancer and target group
+
+**Bonus Task**: For those who complete the task quickly, use Terraform to set up email notifications for scaling events using CloudWatch and SNS.
 ### Solution
 This solution utilizes a range of terraform modules from A. Babonko:
-- [vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
-- [autoscaling](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest)
-- [security-group](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/latest)
-- [autoscaling](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest)
-- [alb](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest)
+ - [vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest)
+ - [autoscaling](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest)
+ - [security-group](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/latest)
+ - [autoscaling](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest)
+ - [alb](https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest)
 
 The infrastructure scheme remains the same as in [Week2/task1](../../week2/task1/docs/EC2_ASG.png).
 ### Reference

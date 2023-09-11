@@ -1,7 +1,13 @@
-### Network Configuration and Web Server Deployment on AWS
-As a newly onboarded DevOps engineer at our tech company, we've received a request from our client that requires careful attention. They need to set up one EC2 instance in each of the three different VPCs. The twist is that these instances need to communicate with each other, necessitating a VPC Peering setup. In addition, the client wants a web server  Nginx installed on these instances via the user-data feature. Use Terraform.
-- Task 1: Set up one EC2 instance in each of the three different VPCs.
-- Task 2: Configure VPC Peering between these VPCs so that the instances can communicate with each other. Be sure to verify and test this communication.
-- Task 3: Using the user-data feature of EC2 instances, install a web server Nginx on each instance. Configure it to serve a simple HTML page on port 80.
-
-*Hint: Be mindful of security configurations. Ensure that the security groups and network ACLs allow the necessary traffic for your setup.*
+### Implement Infrastructure using Terraform
+##### Scenario:
+Imagine you're a DevOps engineer at a growing startup. The company has recently developed a
+new application and wants to leverage AWS for hosting the application. They need to set up and
+manage the infrastructure Your task involves:
+1. Using Terraform, describe the infrastructure for the application from the previous task
+https://github.com/benc-uk/nodejs-demoapp
+2. Set up and configure an EC2 Auto Scaling group, where the application will be run using
+Docker configured through EC2 user data. The infrastructure should include:
+- Network and security groups
+- EC2 Auto Scaling group (you can use this module for reference or implementation: erraform-aws-modules/autoscaling/aws)
+- Load balancer and target group
+__Bonus Task__: For those who complete the task quickly, use Terraform to set up email notifications for scaling events using CloudWatch and SNS.

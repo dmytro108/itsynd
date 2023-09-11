@@ -27,8 +27,7 @@ content: |-
   {{ .Inputs }}
   {{ .Outputs }}
   {{ .Resources }}
-  ### Results
-  {{ include "docs/results.md" }}
+
 
 output:
   file: "README.md"

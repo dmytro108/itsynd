@@ -26,6 +26,7 @@ module "sg_bastion" {
   description = "Allowed ingress SSH traffic"
   vpc_id      = module.vpc.vpc_id
 
+  ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules = ["ssh-tcp"]
   egress_rules  = ["all-all"]
 }

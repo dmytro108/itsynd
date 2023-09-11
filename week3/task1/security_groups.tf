@@ -7,6 +7,7 @@ module "sg_nlb" {
   description = "Allowed ingress HTTP traffic"
   vpc_id      = module.vpc.vpc_id
 
+  ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules = ["http-80-tcp"]
   egress_rules  = ["all-all"]
 }

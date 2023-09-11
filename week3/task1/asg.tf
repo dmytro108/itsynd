@@ -1,15 +1,16 @@
 locals {
   userdata = <<-USERDATA
-    #!/bin/bash
+    #!/bin/sh
     sudo -i
     yum update
     yum install -y docker
     systemctl start docker
-    docker run --rm -it -p 80:3000 ghcr.io/benc-uk/nodejs-demoapp:latest
+    docker run --rm -p 80:3000 ghcr.io/benc-uk/nodejs-demoapp:latest
+
   USERDATA
 }
 
-module "webserver-asg" {
+module "webserver_asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "6.10.0"
   # Autoscaling group
@@ -33,7 +34,7 @@ module "webserver-asg" {
   ebs_optimized               = false
   enable_monitoring           = true
   user_data                   = base64encode(local.userdata)
-
+  key_name                    = aws_key_pair.bastion.key_name
   /* # Scaling
   scaling_policies = {
     my-policy = {

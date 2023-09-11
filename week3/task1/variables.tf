@@ -98,6 +98,6 @@ variable "asg_desire" {
 # ***************************** Load Balancer
 variable "elb_name" {
   description = "Load Balancer name"
-  type = string
-  default = "elb"
+  type        = string
+  default     = "elb"
 }

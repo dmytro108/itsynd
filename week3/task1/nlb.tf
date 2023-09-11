@@ -17,6 +17,14 @@ module "nlb" {
       backend_protocol = "TCP"
       backend_port     = 80
       target_type      = "instance"
+      health_check = {
+        path                = "/"
+        matcher             = "200"
+        healthy_threshold   = 2
+        interval            = 10
+        timeout             = 3
+        unhealthy_threshold = 3
+      }
     }
   ]
 

@@ -27,8 +27,8 @@ module "sg_bastion" {
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules = ["ssh-tcp"]
-  egress_rules  = ["all-all"]
+  ingress_rules       = ["ssh-tcp"]
+  egress_rules        = ["all-all"]
 }
 
 # SSH public key

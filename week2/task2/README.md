@@ -14,4 +14,3 @@
 * **[Use Cases](s10.md)**
 * **[Deployment examples - Mutable Infrastructure](s11.md)**
 * **[Deployment examples - Immutable Infrastructure](s12.md)**
-* **[Conclusion](s13.md)**

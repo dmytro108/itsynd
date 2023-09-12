@@ -1,5 +1,7 @@
 # Title: Mutable and Immutable Infrastructure: Use cases, Tools and Practices
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=2 orderedList=false} -->
+
 ## Slide 1: Introduction
 _Script:_ "Hello to everyone. I'm excited to explore the world of Mutable and Immutable Infrastructure with you. We'll delve into their concepts, analyze their advantages and disadvantages, and gain insights into their real-world applications."
 

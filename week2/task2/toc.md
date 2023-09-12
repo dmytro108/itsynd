@@ -1,17 +1,17 @@
 # Mutable and Immutable Infrastructure: Use cases, Tools and Practices
 
 
-## [Introduction](s1.md)
-## [Mutable Infrastructure Overview](s2.md)
-## [Pros of Mutable Infrastructure](s3.md)
-## [Cons of Mutable Infrastructure](s4.md)
-## [Immutable Infrastructure Overview](s5.md)
-## [Pros of Immutable Infrastructure](s6.md)
-## [Cons of Immutable Infrastructure](s7.md)
-## [Challenges and Solutions](s8.md)
-## [Comparative Metrics](s9.md)
-## [Tools and Technologies](s10.md)
-## [Use Cases](s11.md)
-## [Deployment examples - Mutable Infrastructure](s12.md)
-## [Deployment examples - Immutable Infrastructure](s13.md)
-## [Conclusion](s14.md)
+* **[Introduction](s0.md)**
+* **[Mutable Infrastructure Overview](s1.md)**
+* **[Pros of Mutable Infrastructure](s2.md)**
+* **[Cons of Mutable Infrastructure](s3.md)**
+* **[Immutable Infrastructure Overview](s4.md)**
+* **[Pros of Immutable Infrastructure](s5.md)**
+* **[Cons of Immutable Infrastructure](s6.md)**
+* **[Challenges and Solutions](s7.md)**
+* **[Comparative Metrics](s8.md)**
+* **[Tools and Technologies](s9.md)**
+* **[Use Cases](s10.md)**
+* **[Deployment examples - Mutable Infrastructure](s11.md)**
+* **[Deployment examples - Immutable Infrastructure](s12.md)**
+* **[Conclusion](s13.md)**

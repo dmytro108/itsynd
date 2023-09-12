@@ -77,4 +77,20 @@ The infrastructure scheme remains the same as in [Week2/task1 solution descripti
 | [aws_eip.bastion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
 | [aws_instance.bastion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_key_pair.bastion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
+### Results
+### Screenshots
+![Alt text](docs/2023-09-12_20h25_15.png)
+![Alt text](docs/2023-09-12_20h26_57.png)
+![Alt text](docs/2023-09-12_20h28_09.png)
+![Alt text](docs/2023-09-12_20h28_36.png)
+![Alt text](docs/2023-09-12_20h29_04.png)
+![Alt text](docs/2023-09-12_20h29_18.png)
+![Alt text](docs/2023-09-12_20h30_42.png)
+![Alt text](docs/2023-09-12_20h31_31.png)
+![Alt text](docs/2023-09-12_20h32_08.png)
+![Alt text](docs/2023-09-12_20h32_13.png)
+![Alt text](docs/2023-09-12_20h33_52.png)
+![Alt text](docs/2023-09-12_20h35_25.png)
+![Alt text](docs/2023-09-12_20h36_48.png)
+![Alt text](docs/2023-09-12_20h37_23.png)
 <!-- END_TF_DOCS -->

@@ -24,7 +24,7 @@ variable "vpc_name" {
 variable "vpc_cidr_prefix" {
   description = "VPC CIDR base for calculating real VPC CIDRs"
   type        = string
-  default     = "10.0.0.0/0"
+  default     = "10.0.0.0/12"
 }
 variable "vpc_num" {
   description = "Number of VPCs"
@@ -48,7 +48,7 @@ variable "public_subnet_num" {
 variable "ec2_ami_id" {
   description = "AWS AMI id for EC2 instances"
   type        = string
-  default     = "ami-0e1c5be2aa956338b" # AWS Linux 2023 x86_64
+  default     = "ami-04cb4ca688797756f" # AWS Linux 2023 x86_64, us-east-1
 }
 variable "ec2_type" {
   description = "AWS EC2 instance type"

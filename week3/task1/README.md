@@ -3,9 +3,7 @@
 ## Week 3. Task 1
 ### Implement Infrastructure using Terraform
 ##### Scenario:
-Imagine you're a DevOps engineer at a growing startup. The company has recently developed a
-new application and wants to leverage AWS for hosting the application. They need to set up and
-manage the infrastructure Your task involves:
+Imagine you're a DevOps engineer at a growing startup. The company has recently developed a new application and wants to leverage AWS for hosting the application. They need to set up and manage the infrastructure Your task involves:
  1. Using Terraform, describe the infrastructure for the application from the previous task
 https://github.com/benc-uk/nodejs-demoapp
  2. Set up and configure an EC2 Auto Scaling group, where the application will be run using

@@ -8,7 +8,8 @@ AWS Security Groups implements a statefull firewall. Here is a scheme of such fi
 #### IAM policies to manage AWS service permissions and safeguard access to resources
 On top of the AWS infrastructure from the task [Week3/Task1](../task1/README.md) I built a small independant infrastructure to demonstrate using IAM policies and rolls to safeguard access to an AWS resource. This new infrastructure includes two EC2 instances with two different roles assumed on. One role  - `bucket-reader` grants read access to the all my S3 buckets while another one - `ec2-profile-role` does not. Here is the scheme:
 ![iam](docs/iam_role.png)
-The IAM rolls are declared [here](iam_roles.tf) and IAM policies are declared [here](iam_policies.tf). I created [AWS instance profiles](main.tf) to assume these roles to the instances.
+
+The IAM roles are declared [here](iam_roles.tf) and IAM policies are declared [here](iam_policies.tf). I created [AWS instance profiles](main.tf) to assume these roles to the instances.
 
 Two AWS infrastructers integrated with a [remote state data source](remote_state.tf)
 

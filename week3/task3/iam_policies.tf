@@ -2,8 +2,8 @@
 data "aws_iam_policy_document" "assume_to_ec2" {
   version = "2012-10-17"
   statement {
-    actions   = ["sts:AssumeRole"]
-    effect    = "Allow"
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
     principals {
       type        = "Service"
       identifiers = ["ec2.amazonaws.com"]
@@ -25,5 +25,5 @@ data "aws_iam_policy_document" "s3_read_access" {
 resource "aws_iam_policy" "read_bucket" {
   name        = "can-read-bucket"
   description = "Allows to read and list all my s3 buckets"
-  policy = data.aws_iam_policy_document.s3_read_access
+  policy      = data.aws_iam_policy_document.s3_read_access.json
 }

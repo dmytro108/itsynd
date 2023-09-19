@@ -27,6 +27,7 @@ output "sg_webserver" {
 
 output "ec2_instance" {
   value = {ami = var.ec2_ami_id
-          type = var.ec2_type}
+          type = var.ec2_type
+          key = aws_key_pair.bastion.key_name}
 
 }

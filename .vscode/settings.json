@@ -1,7 +1,12 @@
 {
-   "ansible.python.interpreterPath": "/bin/python",
-   "[python]": {
-      "editor.defaultFormatter": "ms-python.autopep8"
-   },
-   "python.formatting.provider": "none"
+  "ansible.python.interpreterPath": "/bin/python",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#471C49",
+    "titleBar.activeBackground": "#642766",
+    "titleBar.activeForeground": "#FCF9FD"
+  }
 }

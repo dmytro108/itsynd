@@ -1,0 +1,12 @@
+[app_servers]
+%{ for app_ip in app_servers ~}
+${app_ip}
+%{ endfor ~}
+
+[db_servers]
+%{ for db_ip in db_servers ~}
+${db_ip}
+%{ endfor ~}
+
+[all:vars]
+ansible_ssh_user = ec2-user

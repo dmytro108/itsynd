@@ -12,6 +12,7 @@ Your responsibilities will include:
 
 4. Setting up a Load Balancer to distribute traffic among the application instances.
 5. Producing an output file in inventory format for Ansible with Terraform.
+   
 For Ansible, you need to create three roles - two for setting up the infrastructure and one for deploying the application. The infrastructure setup role should install Postgres on an instance and create a user and a database. The role for application instances should be to install the necessary software to run the application and Nginx to proxy requests from the instance's port 80 to the Django application. The deployment role should update the code from GitHub, update the configuration with the current DB credentials, and perform DB migrations.
 
 Run these roles using the AWS EC2 System Manager. [Here, you can check how](https://aws.amazon.com/blogs/mt/running-ansible-playbooks-using-ec2-systems-manager-run-command-and-state-manager/).

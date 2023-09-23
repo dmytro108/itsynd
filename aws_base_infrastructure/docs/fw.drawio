@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="lHtWl0A6xUiiPNq3U4mr" name="Page-1">
+        <mxGraphModel dx="1284" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=1;arcSize=10;strokeColor=#ff0000;fillColor=#FFCCCC;gradientColor=none;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="210" width="300" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;Security Group&lt;br&gt;bastion&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="230" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;strokeColor=#858B94;fillColor=#E6E6E6;verticalAlign=top;align=center;fontColor=#858B94;spacingTop=3;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="120" width="300" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Internet" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#E6E6E6;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=14;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet;spacingTop=-15;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="126" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;b&gt;&lt;font color=&quot;#000000&quot; style=&quot;font-size: 12px;&quot;&gt;SSH&lt;/font&gt;&lt;/b&gt;" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.4;dx=28;direction=south;notch=0;strokeWidth=2;fontSize=14;fontColor=#ff0000;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="150" width="70" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="ALL" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.43;dx=39;direction=north;notch=0;strokeWidth=2;fontSize=12;fontColor=#000000;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="470" y="130" width="70" height="120" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

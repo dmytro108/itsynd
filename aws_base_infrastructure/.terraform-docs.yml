@@ -22,14 +22,11 @@ content: |-
   {{ include "docs/task.md" }}
   {{ include "docs/solution.md" }}
   ### Reference
+  {{ .Outputs }}
+  {{ .Inputs }}
+  {{ .Resources }}
   {{ .Requirements }}
   {{ .Providers }}
-  {{ .Inputs }}
-  {{ .Outputs }}
-  {{ .Resources }}
-  ### Results
-  {{ include "docs/results.md" }}
-
 
 output:
   file: "README.md"

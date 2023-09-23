@@ -1,2 +1,2 @@
 # IT Syndicate Boot Camp
-## Week 3. Task 1
+## The base infrastructure to use in further labs

@@ -1,11 +1,3 @@
-locals {
-  userdata = <<-USERDATA
-    #!/bin/sh
-    sudo systemctl restart amazon-ssm-agent
-
-  USERDATA
-}
-
 resource "aws_iam_instance_profile" "ssm_enabled" {
   name = "ssm-enabled"
   role = aws_iam_role.ssm_managed.name
@@ -20,13 +12,19 @@ resource "aws_instance" "app_servers" {
   key_name             = local.key_name
   security_groups      = [module.app_server_sg.security_group_id]
   iam_instance_profile = aws_iam_instance_profile.ssm_enabled.name
-  user_data            = base64encode(local.userdata)
 
   tags = {
     "Name" = "app-${count.index}"
   }
 }
 
+resource "aws_eip" "app_servers" {
+  count = 2
+
+  instance = aws_instance.app_servers[count.index].id
+  domain   = "vpc"
+  depends_on = [ aws_instance.app_servers ]
+}
 
 resource "aws_instance" "db" {
 
@@ -36,7 +34,6 @@ resource "aws_instance" "db" {
   key_name             = local.key_name
   security_groups      = [module.db_server_sg.security_group_id]
   iam_instance_profile = aws_iam_instance_profile.ssm_enabled.name
-  user_data            = base64encode(local.userdata)
 
   tags = {
     "Name" = "database"

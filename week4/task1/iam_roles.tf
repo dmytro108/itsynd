@@ -1,4 +1,4 @@
-# The role for instances which can read buckets
+# The role for instances which satisfies SSM conditions
 resource "aws_iam_role" "ssm_managed" {
   name               = "ssm-managed"
   description        = "The role for instances which can use SSM"

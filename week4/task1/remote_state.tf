@@ -6,7 +6,6 @@ data "terraform_remote_state" "base" {
     region  = "us-east-1"
     encrypt = true
   }
-
 }
 
 locals {

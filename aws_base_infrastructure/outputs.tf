@@ -24,7 +24,7 @@ output "public_subnets" {
 }
 
 output "ec2_instance" {
-  description = "Main params of ec2 instance and the key pair"
+  description = "Main params of ec2 instance and the key pair. The map includes {\"ami\": ec2 ami id, \"type\": ec2 instance type, \"key\": keypair key name}"
   value = { ami = var.ec2_ami_id
     type = var.ec2_type
   key = aws_key_pair.bastion.key_name }

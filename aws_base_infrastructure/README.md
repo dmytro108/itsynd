@@ -36,7 +36,7 @@ data "terraform_remote_state" "base" {
 |------|-------------|
 | <a name="output_bastion_public_ip"></a> [bastion\_public\_ip](#output\_bastion\_public\_ip) | Bastion node publick IP address |
 | <a name="output_bastion_security_group"></a> [bastion\_security\_group](#output\_bastion\_security\_group) | ID of the bastion security group |
-| <a name="output_ec2_instance"></a> [ec2\_instance](#output\_ec2\_instance) | Main params of ec2 instance and the key pair |
+| <a name="output_ec2_instance"></a> [ec2\_instance](#output\_ec2\_instance) | Main params of ec2 instance and the key pair. The map includes {"ami": ec2 ami id, "type": ec2 instance type, "key": keypair key name} |
 | <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | List of private subnets IDs |
 | <a name="output_public_subnets"></a> [public\_subnets](#output\_public\_subnets) | List of public subnets IDs |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The Sandbox VPC id |

@@ -18,12 +18,11 @@ variable "env_name" {
 # ***************************** Ansible inventory template
 variable "inventory_template" {
   description = "Path to template to produce Ansible inventory file"
-  type = string
-  default = "inventory.tftpl"
+  type        = string
+  default     = "inventory.tftpl"
 }
 variable "inventory_file" {
   description = "Path to Ansible inventory file"
-  type = string
-  default = "inventory"
-
+  type        = string
+  default     = "ansible/inventory"
 }

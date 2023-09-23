@@ -1,9 +1,9 @@
 [app_servers]
-10.0.100.54
-10.0.101.86
+10.0.100.11
+10.0.101.6
 
 [db_servers]
-10.0.0.174
+10.0.0.176
 
 [all:vars]
 ansible_ssh_user = ec2-user

@@ -24,5 +24,5 @@ variable "inventory_template" {
 variable "inventory_file" {
   description = "Path to Ansible inventory file"
   type        = string
-  default     = "ansible/inventory/hosts.ini"
+  default     = "./ansible/inventory/hosts.ini"
 }

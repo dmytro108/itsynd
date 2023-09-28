@@ -1,3 +1,4 @@
+
 resource "local_file" "ansible_inventory" {
   content = templatefile("${var.inventory_template}",
     {

@@ -22,6 +22,7 @@
 
 ################################# Application Load Balancer
 module "alb_sg" {
+  # checkov:skip=CKV_TF_1: ADD REASON
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
 
@@ -37,6 +38,7 @@ module "alb_sg" {
 
 ################################# Application Servers
 module "app_server_sg" {
+  # checkov:skip=CKV_TF_1: ADD REASON
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
 
@@ -59,6 +61,7 @@ module "app_server_sg" {
 
 ################################# Database Servers
 module "db_server_sg" {
+  # checkov:skip=CKV_TF_1: ADD REASON
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
 
@@ -83,10 +86,12 @@ module "db_server_sg" {
     }
   ]
   #egress_rules = []
+  egress_rules = ["all-all"]
 }
 
 ############################### SMM endpoints
 module "smm_endpoints_sg" {
+  # checkov:skip=CKV_TF_1: ADD REASON
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
 

@@ -1,0 +1,11 @@
+%{ for host_ip in hosts ~}
+
+Host ${host_ip}
+User ec2-user
+ProxyCommand ssh -W %h:%p 52.200.190.83
+
+%{ endfor ~}
+
+Host 52.200.190.83
+ForwardAgent yes
+User ec2-user

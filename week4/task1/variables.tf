@@ -26,3 +26,15 @@ variable "inventory_file" {
   type        = string
   default     = "./ansible/inventory/hosts.ini"
 }
+
+# ***************************** SSH config template
+variable "ssh_config_template" {
+  description = "Path to template to produce ssh config file"
+  type        = string
+  default     = "ssh_config.tftpl"
+}
+variable "ssh_config_file" {
+  description = "Path to ssh config file"
+  type        = string
+  default     = "ssh_config"
+}

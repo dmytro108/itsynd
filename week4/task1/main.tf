@@ -21,9 +21,9 @@ resource "aws_instance" "app_servers" {
 resource "aws_eip" "app_servers" {
   count = 2
 
-  instance = aws_instance.app_servers[count.index].id
-  domain   = "vpc"
-  depends_on = [ aws_instance.app_servers ]
+  instance   = aws_instance.app_servers[count.index].id
+  domain     = "vpc"
+  depends_on = [aws_instance.app_servers]
 }
 
 resource "aws_instance" "db" {

@@ -1,0 +1,15 @@
+---
+
+- name: Install
+  hosts: db_servers
+  become: true
+  tasks:
+    - name: Install PostgreSQL
+      ansible.builtin.dnf:
+        name: postgresql15
+        state: present
+    - name: Add user
+      become: false
+      community.postgresql.postgresql_user:
+        name: contrib
+        password: TesT123

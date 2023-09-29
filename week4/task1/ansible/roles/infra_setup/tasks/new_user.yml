@@ -1,0 +1,7 @@
+- name: Create db user
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_user:
+    state: present
+    name: "{{ infra_setup_db_user }}"
+    password: "{{ infra_setup_db_user_passw }}"

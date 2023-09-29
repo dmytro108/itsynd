@@ -1,0 +1,19 @@
+- name: Find out if PostgreSQL is initialized
+  become: true
+  ansible.builtin.stat:
+    path: "{{ infra_setup_pg_hba_path }}"
+  register: postgres_data
+
+- name: Initialize PostgreSQL
+  become: true
+  ansible.builtin.command: postgresql-setup initdb
+  when: not postgres_data.stat.exists
+  register: my_output
+  changed_when: my_output.rc != 0
+
+- name: Start and enable postgresql service
+  become: true
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: true

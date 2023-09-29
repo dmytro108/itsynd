@@ -1,0 +1,7 @@
+- name: Install PostgreSQL
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - postgresql15.x86_64
+      - postgresql15-server
+    state: present

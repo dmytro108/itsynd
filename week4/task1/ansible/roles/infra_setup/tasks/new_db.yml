@@ -1,0 +1,6 @@
+- name: Create app database
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    state: present
+    name: "{{ infra_setup_db_name }}"

@@ -1,0 +1,9 @@
+- name: Grant db user access to app db
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_privs:
+    type: database
+    database: "{{ infra_setup_db_name }}"
+    roles: "{{ infra_setup_db_user }}"
+    grant_option: false
+    privs: all

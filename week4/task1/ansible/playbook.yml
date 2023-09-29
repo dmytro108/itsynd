@@ -1,0 +1,11 @@
+---
+
+- name: Install and Setup PostgreSQL
+  hosts: db_servers
+  gather_facts: false
+  roles:
+    - role: infra_setup
+      infra_setup_db_name: "django1"
+      infra_setup_db_user: "django1"
+      infra_setup_db_user_passw: "Test123"
+      infra_setup_pg_hba_path: "/var/lib/pgsql/data/pg_hba.conf"

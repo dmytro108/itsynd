@@ -1,0 +1,6 @@
+---
+
+infra_setup_db_name: "django_"
+infra_setup_db_user: "django_"
+infra_setup_db_user_passw: "Test123"
+infra_setup_pg_hba_path: "/var/lib/pgsql/data/pg_hba.conf"

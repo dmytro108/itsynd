@@ -1,0 +1,5 @@
+---
+
+- ansible.builtin.include_tasks: inst_nginx.yml
+- ansible.builtin.include_tasks: config_nginx.yml
+- ansible.builtin.include_tasks: run_nginx.yml

@@ -1,0 +1,7 @@
+---
+sw_install_server_name: "{{ ansible_default_ipv4.address }}"
+sw_install_app_port: 3000
+sw_install_document_root: "/usr/share/nginx"
+sw_install_app_root: ""
+sw_install_nginx_conf_path: "/etc/nginx/conf.d/"
+sw_install_nginx_conf_file: "app_server.conf"

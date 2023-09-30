@@ -1,0 +1,7 @@
+- name: Apply Nginx template
+  become: true
+  ansible.builtin.template:
+    src: nginx_config.j2
+    dest: "{{ sw_install_nginx_conf_path }}/{{ sw_install_nginx_conf_file }}"
+    mode: "0644"
+  notify: Restart Nginx

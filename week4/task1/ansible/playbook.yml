@@ -1,5 +1,4 @@
 ---
-
 - name: Install and Setup PostgreSQL
   hosts: db_servers
   gather_facts: false
@@ -9,3 +8,14 @@
       infra_setup_db_user: "django1"
       infra_setup_db_user_passw: "Test123"
       infra_setup_pg_hba_path: "/var/lib/pgsql/data/pg_hba.conf"
+
+- name: Install SW on Application db_servers
+  hosts: app_servers
+  roles:
+    - role: sw_install
+      sw_install_server_name: "{{ ansible_default_ipv4.address }}"
+      sw_install_app_port: 3000
+      sw_install_document_root: "/usr/share/nginx"
+      sw_install_app_root: ""
+      sw_install_nginx_conf_path: "/etc/nginx/conf.d/"
+      sw_install_nginx_conf_file: "app_server.conf"

@@ -17,3 +17,11 @@
     name: postgresql
     state: started
     enabled: true
+
+- name: Setup listen address
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_set:
+    name: listen_addresses
+    value: "0.0.0.0"
+  notify: Restart PostgreSQL

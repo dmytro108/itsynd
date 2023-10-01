@@ -1,2 +1,7 @@
 ---
-# handlers file for infra_setup
+
+- name: Restart PostgreSQL
+  become: true
+  ansible.builtin.service:
+    name: postgresql
+    state: restarted

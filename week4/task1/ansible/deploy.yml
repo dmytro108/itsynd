@@ -1,0 +1,85 @@
+---
+- name: Deploy
+  hosts: 10.0.100.115
+  vars:
+    deploy_app_repo: "https://github.com/dmytro108/sample-django.git"
+    deploy_app_name: "sample-django"
+    deploy_app_path: "$HOME/app/{{ deploy_app_name }}"
+    deploy_app_requirements: "{{ deploy_app_path }}/requirements.txt"
+    deploy_app_virtualenv: "$HOME/appenv/{{ deploy_app_name }}"
+    deploy_security_mode: ""
+    deploy_django_settings_module: ""
+
+  tasks:
+    - name: Install Prerequisites
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - python3-pip
+          - python3-devel
+          - acl
+          - gcc
+          - git
+        state: present
+
+    - name: Install python virtualenv
+      become: true
+      ansible.builtin.pip:
+        name: virtualenv
+
+    - name: Add django user
+      become: true
+      ansible.builtin.user:
+        name: django
+        password: "*"
+        expires: -1
+
+    - name: Deploy app from git
+      become: true
+      become_user: django
+      ansible.builtin.git:
+        repo: "{{ deploy_app_repo }}"
+        dest: "{{ deploy_app_path }}"
+        version: "HEAD"
+        force: true
+
+    - name: Install python requirements
+      become: true
+      become_user: django
+      ansible.builtin.pip:
+        requirements: "{{ deploy_app_requirements }}"
+        virtualenv: "{{ deploy_app_virtualenv }}"
+        virtualenv_site_packages: true
+
+    - name: Set manage.py executable
+      become: true
+      become_user: django
+      ansible.builtin.file:
+        path: "{{ deploy_app_path }}/manage.py"
+        mode: "0755"
+
+    - name: Deploy Django Application
+      become: true
+      become_user: django
+      community.general.django_manage:
+        command: migrate
+        app_path: "{{ deploy_app_path }}"
+        virtualenv: "{{ deploy_app_virtualenv }}"
+      environment:
+        DATABASE_URL: "postgres://django:Test123@10.0.0.155:/django"
+#
+#    - name: Set environment viables for django app
+#      ansible.builtin.lineinfile:
+#        dest: /etc/environment
+#        state: present
+#        regexp: ^{{ item.key }}=
+#        line: "{{ item.key }}={{ item.value }}"
+#      loop:
+#        - key: APP_PATH
+#          value: "{{ deploy_app_path }}"
+#        - key: APP_ENV
+#          value: "{{ deploy_app_name }}"
+#        - key: APP_SECURITY
+#          value: "{{ deploy_security_mode }}"
+#        - key: DJANGO_SETTINGS_MODULE
+#          value: "{{ deploy_django_settings_module }}"

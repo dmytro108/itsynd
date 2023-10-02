@@ -1,4 +1,5 @@
 ---
+
 # ************************************** Install PostgreSQL & Python libs
 - ansible.builtin.include_tasks: inst_prerequisites.yml
 
@@ -6,8 +7,7 @@
 
 # ************************************** PostgreSQL Up & Run
 - ansible.builtin.include_tasks: run_postgres.yml
+- ansible.builtin.include_tasks: setup_postgres.yml
 
 # ************************************** DB Setup
-- ansible.builtin.include_tasks: new_db.yml
-- ansible.builtin.include_tasks: new_user.yml
-- ansible.builtin.include_tasks: user_privs.yml
+- ansible.builtin.include_tasks: setup_db.yml

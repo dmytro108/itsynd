@@ -1,0 +1,21 @@
+---
+
+- name: Setup listen address
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_set:
+    name: listen_addresses
+    value: "0.0.0.0"
+  notify: Restart PostgreSQL
+
+- name: Allow coonections to PostgreSQL from app servers
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: "{{ infra_setup_pg_hba_path }}"
+    contype: host
+    users: all
+    address: "{{ infra_setup_pg_alowed_hosts }}"
+    databases: all
+    method: "password"
+  notify: Restart PostgreSQL

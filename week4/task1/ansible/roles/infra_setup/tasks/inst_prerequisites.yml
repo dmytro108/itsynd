@@ -1,18 +1,8 @@
 - name: Install pip
   become: true
   ansible.builtin.dnf:
-    name: python3-pip
+    name:
+      - python3-pip
+      - python3-psycopg2
+      - acl # Needed to allow Ansible acting on behalf of postgres user
     state: present
-
-- name: Install acl # Needed for acting Ansible on bahalf of postgres user
-  become: true
-  ansible.builtin.dnf:
-    name: acl
-    state: present
-
-- name: Install psycopg2 # Needed for Ansible PostgreSQL module
-  become: true
-  become_user: postgres
-  ansible.builtin.pip:
-    name: psycopg2-binary
-    executable: pip3

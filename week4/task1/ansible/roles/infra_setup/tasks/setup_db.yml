@@ -1,0 +1,30 @@
+- name: Create db user
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_user:
+    user: "{{ infra_setup_db_user }}"
+    password: "{{ infra_setup_db_user_passw }}"
+    state: present
+
+- name: Create app database
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    db: "{{ infra_setup_db_name }}"
+    owner: "{{ infra_setup_db_user }}"
+    state: present
+
+- name: Grant db user access to app db
+  become: true
+  become_user: postgres
+  community.postgresql.postgresql_privs:
+    type: database
+    database: "{{ infra_setup_db_name }}"
+    role: "{{ infra_setup_db_user }}"
+    grant_option: false
+    privs: ALL
+
+- name: Add variables to dummy host
+  ansible.builtin.add_host:
+    name: dummy
+    db_url_: "postgres://{{ infra_setup_db_user }}:{{ infra_setup_db_user_passw }}@{{ infra_setup_db_host }}:{{ infra_setup_db_port }}/{{ infra_setup_db_name }}"

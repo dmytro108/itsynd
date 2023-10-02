@@ -62,3 +62,27 @@ resource "local_file" "ansible_inventory" {
   filename = var.inventory_file
 }
 ```
+#### Ansible Plays
+**Connection to controlling nodes**
+I did not use AWS SSM for running Ansible Playbooks as it was in the task because although this is a secure but slow and inconvinient way from debuging and development perspective.
+I used more traditional way of ssh agent forwarding through the Bastion host.
+As far I know there is a way combaining high security but still providing ability to work directly through ssh tunnel, [described here](https://medium.com/@shyam.rughani30/revolutionizing-access-no-more-bastion-hosts-with-aws-private-endpoint-3d7352a4dbe7). Unfortunately, I  had no chance to try this but definately it worths tryng in the future.
+
+**Project highlights**
+1. Idempotency - The playbook does not have any task using shell or command modules. This ensures the playbook is 100% idempotent.
+2. Transfering variables across plays and roles. In the playbook I have two plays working with different inventory groups. One play works with DB server and another with application servers. There was a problem how to pass the DB connection string generated on the database host to the application hosts. I used a "dummy host" as a variable storage accessable in all roles.
+The [database setup task](ansible/roles/infra_setup/tasks/setup_db.yml) in the [infra_setup role](ansible/roles/infra_setup/tasks/main.yml) from [Install and Setup PostgreSQL play](ansible/playbook.yml):
+```yaml
+- name: Add variables to dummy host
+  ansible.builtin.add_host:
+    name: dummy
+    db_url_: "postgres://{{ infra_setup_db_user }}:{{ infra_setup_db_user_passw }}@{{ infra_setup_db_host }}:{{ infra_setup_db_port }}/{{ infra_setup_db_name }}"
+```
+Passing the DB connection string to the [deploy role](ansible/roles/deploy/tasks/main.yml) in the [playbook](ansible/playbook.yml):
+```yaml
+deploy_app_db_url: "{{ hostvars['dummy']['db_url_'] }}"
+```
+3. DB password - I use the builtin filter to generate a randome but idempotetnt password:
+```yaml
+infra_setup_db_user_passw: "{{ lookup('ansible.builtin.password', '/dev/null', seed=inventory_hostname) }}"
+```

@@ -1,0 +1,25 @@
+---
+
+- name: Install Prerequisites
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - python3-pip
+      - python3-devel
+      - python3-virtualenv
+      - acl
+      - gcc
+      - git
+    state: present
+
+#- name: Install python virtualenv
+#  become: true
+#  ansible.builtin.pip:
+#    name: virtualenv
+
+- name: Add django user
+  become: true
+  ansible.builtin.user:
+    name: django
+    password: "*"
+    expires: -1

@@ -1,0 +1,13 @@
+---
+
+# ************************************** Install prerequisite SW
+- ansible.builtin.include_tasks: inst_prerequisites.yml
+
+# ************************************** Fetch the app from git
+- ansible.builtin.include_tasks: deploy_app.yml
+
+# ************************************** DB migration
+- ansible.builtin.include_tasks: setup_app.yml
+
+# ************************************** Run the app
+- ansible.builtin.include_tasks: run_app.yml

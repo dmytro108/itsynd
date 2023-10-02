@@ -1,0 +1,18 @@
+---
+
+- name: Set manage.py executable
+  become: true
+  become_user: django
+  ansible.builtin.file:
+    path: "{{ deploy_app_path }}/manage.py"
+    mode: "0755"
+
+- name: Migrate Django Application
+  become: true
+  become_user: django
+  community.general.django_manage:
+    command: migrate
+    app_path: "{{ deploy_app_path }}"
+    virtualenv: "{{ deploy_app_virtualenv }}"
+  environment:
+    DATABASE_URL: "{{ deploy_app_db_url }}"

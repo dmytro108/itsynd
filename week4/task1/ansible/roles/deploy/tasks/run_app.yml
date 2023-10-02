@@ -1,0 +1,11 @@
+---
+
+- name: Run Django Application
+  become: true
+  become_user: django
+  community.general.gunicorn:
+    app: 'mysite.wsgi'
+    chdir: "{{ deploy_app_path }}"
+    venv: "{{ deploy_app_virtualenv }}"
+  environment:
+    DATABASE_URL: "{{ deploy_app_db_url }}"

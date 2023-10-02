@@ -1,0 +1,17 @@
+---
+- name: Deploy app from git
+  become: true
+  become_user: django
+  ansible.builtin.git:
+    repo: "{{ deploy_app_repo }}"
+    dest: "{{ deploy_app_path }}"
+    version: "HEAD"
+    force: true
+
+- name: Install python requirements
+  become: true
+  become_user: django
+  ansible.builtin.pip:
+    requirements: "{{ deploy_app_requirements }}"
+    virtualenv: "{{ deploy_app_virtualenv }}"
+    virtualenv_site_packages: true

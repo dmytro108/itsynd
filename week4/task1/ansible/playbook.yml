@@ -1,13 +1,18 @@
 ---
+
 - name: Install and Setup PostgreSQL
   hosts: db_servers
-  gather_facts: false
+  gather_facts: true
   roles:
+    - role: common_settings
     - role: infra_setup
       infra_setup_db_name: "django1"
       infra_setup_db_user: "django1"
-      infra_setup_db_user_passw: "Test123"
+      infra_setup_db_user_passw: "{{ lookup('ansible.builtin.password', '/dev/null', seed=inventory_hostname) }}"
       infra_setup_pg_hba_path: "/var/lib/pgsql/data/pg_hba.conf"
+      infra_setup_db_host: "{{ ansible_default_ipv4.address }}"
+      infra_setup_db_port: "5432"
+      infra_setup_pg_alowed_hosts: "10.0.0.0/16"
 
 - name: Install SW on Application db_servers
   hosts: app_servers
@@ -20,5 +25,10 @@
       sw_install_nginx_conf_path: "/etc/nginx/conf.d/"
       sw_install_nginx_conf_file: "app_server.conf"
 
-    # - role: deploy
-     # deploy_: ""
+    - role: deploy
+      deploy_app_repo: "https://github.com/dmytro108/sample-django.git"
+      deploy_app_name: "sample-django"
+      deploy_app_path: "$HOME/app/{{ deploy_app_name }}"
+      deploy_app_requirements: "{{ deploy_app_path }}/requirements.txt"
+      deploy_app_virtualenv: "$HOME/appenv/{{ deploy_app_name }}"
+      deploy_app_db_url: "{{ hostvars['dummy']['db_url_'] }}"

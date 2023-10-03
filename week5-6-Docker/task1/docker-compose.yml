@@ -21,7 +21,7 @@ services:
 # -------------------------------- Django app
   app:
     container_name: app
-    #image: sample_django_app:latest
+    # image: sample_django_app:latest
     network_mode: host
     build:
       context: ./sample-django
@@ -31,13 +31,13 @@ services:
       - "DATABASE_URL=postgres://postgres:Test123@localhost:5432/postgres"
     depends_on:
       db:
-         condition: service_healthy
-         restart: true
+        condition: service_healthy
+        restart: true
 
 # ---------------------------------- Initilize the db with manage.py migrate
   db_init:
     container_name: db_init
-    #image: sample_django_app:latest
+    # image: sample_django_app:latest
     build:
       context: ./sample-django
       tags:

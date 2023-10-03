@@ -1,0 +1,54 @@
+version: "3.7"
+
+services:
+
+# ---------------------------- PostgreSQL database with persistant storage
+  db:
+    container_name: pg-db
+    image: postgres:15.4-alpine3.17
+    volumes:
+      - "./PGdata:/var/lib/postgresql/data"
+    network_mode: host
+    environment:
+      - "POSTGRES_PASSWORD=Test123"
+    healthcheck:
+      test: "pg_isready  --host=localhost --port=5432 --username=postgres"
+      interval: 10s
+      timeout: 8s
+      retries: 3
+      start_period: 2s
+
+# -------------------------------- Django app
+  app:
+    container_name: app
+    #image: sample_django_app:latest
+    network_mode: host
+    build:
+      context: ./sample-django
+      tags:
+        - "sample_django_app:latest"
+    environment:
+      - "DATABASE_URL=postgres://postgres:Test123@localhost:5432/postgres"
+    depends_on:
+      db:
+         condition: service_healthy
+         restart: true
+
+# ---------------------------------- Initilize the db with manage.py migrate
+  db_init:
+    container_name: db_init
+    #image: sample_django_app:latest
+    build:
+      context: ./sample-django
+      tags:
+        - "sample_django_app:latest"
+    profiles:
+      - db_init
+    network_mode: host
+    environment:
+      - "DATABASE_URL=postgres://postgres:Test123@localhost:5432/postgres"
+    entrypoint: "python manage.py migrate"
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true

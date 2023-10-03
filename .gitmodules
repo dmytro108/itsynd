@@ -1,0 +1,6 @@
+[submodule "week4/task1/sample-django"]
+	path = week4/task1/sample-django
+	url = https://github.com/dmytro108/sample-django.git
+[submodule "week5/task1/sample-django"]
+	path = week5/task1/sample-django
+	url = https://github.com/dmytro108/sample-django.git

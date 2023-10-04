@@ -41,7 +41,7 @@ variable "private_subnet_num" {
 variable "public_subnet_num" {
   description = "Number of public subnets in each VPC"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 # ************************************ EC2
@@ -55,8 +55,8 @@ variable "ec2_type" {
   type        = string
   default     = "t2.micro" # Free tier
 }
-variable "bastion_pub_key" {
-  description = "SSH publick key for access to bastion host"
+variable "my_pub_key" {
+  description = "SSH publick key for access to all hosts"
   type        = string
   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDGOVO/Cag0QuYYm5ThB+zehSFbskFjLS1T34y/TxtJ9 bastion"
 }

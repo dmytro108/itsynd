@@ -20,7 +20,7 @@ module "vpc" {
   private_subnets = local.cidrs[0].private_subnet_cidrs
   public_subnets  = local.cidrs[0].public_subnet_cidrs
 
-  enable_nat_gateway = true
+  enable_nat_gateway = false
   enable_vpn_gateway = false
 
   tags = {

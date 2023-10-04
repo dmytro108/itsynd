@@ -1,11 +1,6 @@
-output "bastion_public_ip" {
-  description = "Bastion node publick IP address"
-  value       = aws_eip.bastion.public_ip
-}
-
-output "bastion_security_group" {
-  description = "ID of the bastion security group"
-  value       = module.sg_bastion.security_group_id
+output "tunnel_security_group" {
+  description = "ID of the instance coonect endpoint security group"
+  value       = module.sg_tunnel.security_group_id
 }
 
 output "vpc_id" {
@@ -27,5 +22,5 @@ output "ec2_instance" {
   description = "Main params of ec2 instance and the key pair. The map includes {\"ami\": ec2 ami id, \"type\": ec2 instance type, \"key\": keypair key name}"
   value = { ami = var.ec2_ami_id
     type = var.ec2_type
-  key = aws_key_pair.bastion.key_name }
+  key = aws_key_pair.my_key.key_name }
 }

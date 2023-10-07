@@ -14,3 +14,15 @@ variable "env_name" {
   type        = string
   default     = "Unknown"
 }
+variable "db_user" {
+  type    = string
+  default = "django"
+}
+variable "db_password" {
+  type    = string
+  default = "django123"
+}
+variable "db_name" {
+  type    = string
+  default = "django"
+}

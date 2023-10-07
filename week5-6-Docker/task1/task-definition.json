@@ -1,0 +1,17 @@
+    {
+      "name": "sample_django_app",
+      "image": "445545530422.dkr.ecr.us-east-1.amazonaws.com/sample_django_app:latest",
+      "environment": [
+        {
+          "name": "DATABASE_URL",
+          "value": "postgres://django:django@localhost:5432/django"
+        }
+      ],
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }

@@ -9,11 +9,12 @@ data "terraform_remote_state" "base" {
 }
 
 locals {
-  vpc_id           = data.terraform_remote_state.base.outputs.vpc_id
-  private_subnet_1 = data.terraform_remote_state.base.outputs.private_subnets[0]
-  public_subnets   = data.terraform_remote_state.base.outputs.public_subnets
-  bastion_sg       = data.terraform_remote_state.base.outputs.bastion_security_group
-  key_name         = data.terraform_remote_state.base.outputs.ec2_instance["key"]
-  ec2_ami_id       = data.terraform_remote_state.base.outputs.ec2_instance["ami"]
-  ec2_type         = data.terraform_remote_state.base.outputs.ec2_instance["type"]
+  vpc_id          = data.terraform_remote_state.base.outputs.vpc_id
+  private_subnets = data.terraform_remote_state.base.outputs.private_subnets
+  private_rtables = data.terraform_remote_state.base.outputs.private_subnets_route_tables
+  public_subnets  = data.terraform_remote_state.base.outputs.public_subnets
+  sg_tunnel       = data.terraform_remote_state.base.outputs.tunnel_security_group
+  key_name        = data.terraform_remote_state.base.outputs.ec2_instance["key"]
+  ec2_ami_id      = data.terraform_remote_state.base.outputs.ec2_instance["ami"]
+  ec2_type        = data.terraform_remote_state.base.outputs.ec2_instance["type"]
 }

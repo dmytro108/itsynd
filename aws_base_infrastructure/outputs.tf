@@ -13,6 +13,11 @@ output "private_subnets" {
   value       = module.vpc.private_subnets
 }
 
+output "private_subnets_route_tables" {
+  description = "List of private subnets route tables IDs"
+  value       = module.vpc.private_route_table_ids
+}
+
 output "public_subnets" {
   description = "List of public subnets IDs"
   value       = module.vpc.public_subnets

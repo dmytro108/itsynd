@@ -14,9 +14,9 @@ data "aws_iam_policy_document" "ecr_repo_acces" {
       "ecr:GetDownloadUrlForLayer",
       "ecr:PutImage"
     ]
-    effect    = "Allow"
+    effect = "Allow"
     principals {
-      type = "*"
+      type        = "*"
       identifiers = ["*"]
     }
   }

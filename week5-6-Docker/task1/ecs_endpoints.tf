@@ -1,11 +1,11 @@
 locals {
   ecs_endpoints = [
-      "com.amazonaws.${var.region}.ecs-agent",
-      "com.amazonaws.${var.region}.ecs-telemetry",
-      "com.amazonaws.${var.region}.ecs",
-      "com.amazonaws.${var.region}.ecr.dkr",
-      "com.amazonaws.${var.region}.ecr.api",
-      "com.amazonaws.${var.region}.s3"
+    "com.amazonaws.${var.region}.ecs-agent",
+    "com.amazonaws.${var.region}.ecs-telemetry",
+    "com.amazonaws.${var.region}.ecs",
+    "com.amazonaws.${var.region}.ecr.dkr",
+    "com.amazonaws.${var.region}.ecr.api",
+    "com.amazonaws.${var.region}.s3"
   ]
 }
 

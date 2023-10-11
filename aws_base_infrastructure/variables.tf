@@ -41,7 +41,7 @@ variable "private_subnet_num" {
 variable "public_subnet_num" {
   description = "Number of public subnets in each VPC"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 # ************************************ EC2

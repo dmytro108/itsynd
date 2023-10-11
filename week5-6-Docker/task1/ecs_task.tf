@@ -3,11 +3,12 @@ resource "aws_ecs_task_definition" "app_task_definition" {
   family                   = "app-task"
   requires_compatibilities = ["EC2"]
   #container_definitions    = file("task-definition.json")
+  execution_role_arn = aws_iam_role.task_exec_role.arn
+  network_mode       = "awsvpc"
   container_definitions = jsonencode([
     {
       "name" : "sample_django_app",
-      "image" : "445545530422.dkr.ecr.us-east-1.amazonaws.com/django_app:latest",
-      "networkMode" : "host",
+      "image" : "${local.docker_image}:latest",
       "environment" : [
         {
           "name" : "DATABASE_URL",
@@ -17,12 +18,13 @@ resource "aws_ecs_task_definition" "app_task_definition" {
       "portMappings" : [
         {
           "containerPort" : 8000,
-          "hostPort" : 80,
+          "hostPort" : 8000,
           "protocol" : "tcp"
         }
       ],
       "requiresCompatibilities" : ["EC2"],
-      "memory" : 512
+      "memory" : 256
+      "cpu":100
     }
   ])
 }

@@ -1,51 +1,14 @@
-# Allow access to the ECR repository for using images
-data "aws_iam_policy_document" "ecr_repo_acces" {
+# Assume a role to an ECS task
+data "aws_iam_policy_document" "ecs_task_role_assume" {
   statement {
-    sid = "ECRPermissions"
-    actions = [
-      "ecr:DescribeImages",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetAuthorizationToken",
-      "ecr:BatchGetImage",
-      "ecr:InitiateLayerUpload",
-      "ecr:UploadLayerPart",
-      "ecr:CompleteLayerUpload",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:PutImage"
-    ]
-    effect = "Allow"
+    sid     = "ECSTaskRoleAssume"
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
     principals {
-      type        = "*"
-      identifiers = ["*"]
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
     }
   }
 }
 
-/*
-# Create an IAM role for the ECS task
-resource "aws_iam_role" "task_role" {
-  name = "ecs-task-role"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
-
-# Attach an IAM policy to the ECS task role
-resource "aws_iam_role_policy_attachment" "task_role_policy_attachment" {
-  role       = aws_iam_role.task_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess"
-}
-*/
+# task execution IAM role permissions

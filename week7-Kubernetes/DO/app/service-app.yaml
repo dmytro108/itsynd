@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name:      public-app
+  namespace: django-app
+
+spec:
+  selector:
+    app: django-sample
+  type:  NodePort
+  ports:
+  - name:       public-app-port
+    protocol:   TCP
+    port:       80
+    targetPort: django-port

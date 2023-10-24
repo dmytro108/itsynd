@@ -1,0 +1,28 @@
+---
+kind:       Ingress
+apiVersion: networking.k8s.io/v1
+
+metadata:
+  name:      app-ingress
+  namespace: django-app
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: itsynd.dima108.v6.rocks
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: public-app
+                port:
+                  number: 8080
+
+
+
+#  tls:
+#  - hosts:
+#      - https-example.foo.com
+#    secretName: testsecret-tls

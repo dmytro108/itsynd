@@ -1,0 +1,82 @@
+kind:       Deployment
+apiVersion: apps/v1
+
+metadata:
+  name:      sample-app
+  namespace: django-app
+  labels:
+    app:     django-sample
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: django-sample
+
+  template:
+
+    metadata:
+      namespace: django-app
+      labels:
+        app:     django-sample
+
+    spec:
+      restartPolicy: Always
+
+      containers:
+        - name:  django-app
+          image: registry.digitalocean.com/sample-django-app/app:latest
+
+          resources:
+            requests:
+              cpu:    100m
+              memory: 100Mi
+            limits:
+              cpu:    100m
+              memory: 100Mi
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-conf
+                  key:  db_connection
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-conf
+                  key:  allowed_host
+
+          ports:
+            - containerPort: 8000
+              protocol:      TCP
+              name:          django-port
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: django-port
+              httpHeaders:
+                - name:  Host
+                  value: itsynd.dima108.v6.rocks
+            initialDelaySeconds: 60
+            periodSeconds:       5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: django-port
+              httpHeaders:
+                - name:  Host
+                  value: itsynd.dima108.v6.rocks
+            initialDelaySeconds: 70
+            periodSeconds:       10
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot:             true
+            runAsUser:                999
+            capabilities:
+              drop:
+                - NET_RAW
+                - ALL

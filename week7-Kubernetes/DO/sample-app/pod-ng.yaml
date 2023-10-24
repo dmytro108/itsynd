@@ -1,0 +1,49 @@
+---
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: ng
+  namespace: django-app
+  labels:
+    app: django-sample
+
+spec:
+  containers:
+  - name: ng
+    image: "nginx"
+
+    #command:
+    #  - "python"
+    #  - "manage.py"
+    #  - "migrate"
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 200Mi
+      requests:
+        cpu: 50m
+        memory: 100Mi
+
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: app-conf
+          key: db_connection
+
+    ports:
+    - containerPort:  80
+      name:  ng-port
+
+  restartPolicy: Always
+
+# python manage.py migrate
+#    volumeMounts:
+#    - name: localtime
+#      mountPath: /etc/localtime
+#  volumes:
+#    - name: localtime
+#      hostPath:
+#        path: /usr/share/zoneinfo/Asia/Shanghai

@@ -58,7 +58,7 @@ spec:
               port: django-port
               httpHeaders:
                 - name: Host
-                  value: itsynd.dima108.v6.rocks
+                  value: itsynd.fedunets.uk
             initialDelaySeconds: 5
             periodSeconds: 5
           livenessProbe:
@@ -67,7 +67,7 @@ spec:
               port: django-port
               httpHeaders:
                 - name: Host
-                  value: itsynd.dima108.v6.rocks
+                  value: itsynd.fedunets.uk
             initialDelaySeconds: 5
             periodSeconds: 10
 

@@ -8,5 +8,12 @@
     "activityBar.background": "#471C49",
     "titleBar.activeBackground": "#642766",
     "titleBar.activeForeground": "#FCF9FD"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/yamllint.json": "file:///home/dima108/repos/itsynd/week7-Kubernetes/DO/k8s-sample-django-app-kubeconfig.yaml",
+    "kubernetes://schema/apps/v1@deployment": [
+      "file:///home/dima108/repos/itsynd/week7-Kubernetes/DO/app/django.yaml"
+    ],
+    "kubernetes://schema/v1@pod": "file:///home/dima108/repos/itsynd/week7-Kubernetes/DO/app/pod-app.yaml"
   }
 }

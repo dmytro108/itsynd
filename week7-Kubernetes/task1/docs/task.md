@@ -5,10 +5,10 @@
    - [ ] Deployment configuration that:
      - [x] Runs two replicas of the application.
      - [x] Operates on port 8080
-     - [ ] Propagates ConfigMap and Secret to the container
-     - [x] Has readiness and liveness probes.
+     - [x] Propagates ConfigMap and Secret to the container
+     - [x] Has readiness and liveness probes
      - [x] A Service of type ClusterIP
-     - [x] An Ingress controller for AWS or Digital Ocean, depending on the provider, which will elevate the corresponding LB.
-     - [x] A CertManager, which will obtain a Let's Encrypt certificate.
+     - [x] An Ingress controller for AWS or Digital Ocean, depending on the provider, which will elevate the corresponding LB
+     - [x] A CertManager, which will obtain a Let's Encrypt certificate
      - [x] A HorizontalPodAutoscaler, which will scale the replicas from 2 to 4 depending on the CPU or RAM usage at 80%
 1. [ ] Prepare a helmfile for deploying the environment

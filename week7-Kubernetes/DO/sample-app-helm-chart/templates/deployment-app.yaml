@@ -1,0 +1,80 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: sample-app
+  namespace: {{ .Release.Name}}-django-app
+  labels:
+    app: django-sample
+
+spec:
+  replicas: {{ .Values.Deployment.replicas.min }}
+
+  selector:
+    matchLabels:
+      app: django-sample
+
+  template:
+    metadata:
+      namespace: {{ .Release.Name}}-django-app
+      labels:
+        app: django-sample
+
+    spec:
+      restartPolicy: Always
+
+      containers:
+        - name: django-app
+          image: registry.digitalocean.com/sample-django-app/app:latest
+          resources:
+            requests:
+              cpu:  {{ .Values.Container.resources.cpu.req }}
+              memory: {{ .Values.Container.resources.memory.req }}
+            limits:
+              cpu: {{ .Values.Container.resources.cpu.lim }}
+              memory: {{ .Values.Container.resources.memory.lim }}
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-connect
+                  key: db_url
+            - name: DJANGO_ALLOWED_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: django-app-conf
+                  key: allowed_host
+
+          ports:
+            - containerPort: {{ .Values.Container.port }}
+              protocol: TCP
+              name: django-port
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: django-port
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.Config.host }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: django-port
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.Config.host }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 999
+            capabilities:
+              drop:
+                - NET_RAW
+                - ALL

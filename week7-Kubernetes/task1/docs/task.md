@@ -1,8 +1,8 @@
 1. [x] Deploy a Kubernetes cluster in either DigitalOcean or AWS
-1. [ ] Create a Helm chart for the application, which should include the following:
+1. [x] Create a Helm chart for the application, which should include the following:
    - [x] ConfigMap for environment variables.
    - [ ] Secret for secret environment variables (such as database password). Secrets should be encrypted using any method available for Kubernetes (for instance, helm-secrets).
-   - [ ] Deployment configuration that:
+   - [x] Deployment configuration that:
      - [x] Runs two replicas of the application.
      - [x] Operates on port 8080
      - [x] Propagates ConfigMap and Secret to the container

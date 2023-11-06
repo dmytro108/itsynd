@@ -1,0 +1,30 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+
+metadata:
+  name: app-ingress
+  namespace: {{ .Release.Name}}-django-app
+  annotations:
+    cert-manager.io/issuer: letsincrypt-prod
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - {{ .Values.Config.host }}
+      secretName: letsincrypt-prod-cert
+
+  rules:
+    - host: {{ .Values.Config.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: public-app
+                port:
+                  number: {{ .Values.Service.port }}
+

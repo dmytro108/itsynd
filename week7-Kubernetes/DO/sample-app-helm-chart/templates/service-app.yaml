@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name:      public-app
+  namespace: {{ .Release.Name}}-django-app
+
+spec:
+  type: ClusterIP
+  ports:
+    - name:       public-app-port
+      port:       {{ .Values.Service.port}}
+      targetPort: django-port
+      protocol:   TCP
+  selector:
+    app: django-sample

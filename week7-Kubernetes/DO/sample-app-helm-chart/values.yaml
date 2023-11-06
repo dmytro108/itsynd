@@ -1,0 +1,30 @@
+# Deployment vars
+Deployment:
+  replicas:
+    min: 2
+    max: 6
+
+Container:
+  version: latest
+  port: 8000
+  resources:
+    cpu:
+      req: 400m
+      lim: 500m
+    memory:
+      req: 200Mi
+      lim: 512Mi
+
+HPA:
+  target:
+    cpu: 50
+    memory: 80
+
+Config:
+  host: django-app.fedunets.uk
+
+Service:
+  port: 8080
+
+TLS:
+  mail: dmitry.fedunets@gmail.com

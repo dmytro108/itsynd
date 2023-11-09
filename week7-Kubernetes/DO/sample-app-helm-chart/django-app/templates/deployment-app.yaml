@@ -3,7 +3,7 @@ apiVersion: apps/v1
 
 metadata:
   name: sample-app
-  namespace: {{ .Release.Name}}-django-app
+  namespace: {{ .Release.Name}}
   labels:
     app: django-sample
 

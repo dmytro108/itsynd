@@ -4,7 +4,7 @@ apiVersion: networking.k8s.io/v1
 
 metadata:
   name: app-ingress
-  namespace: {{ .Release.Name}}-django-app
+  namespace: {{ .Release.Name }}
   annotations:
     cert-manager.io/issuer: letsincrypt-prod
 
@@ -27,4 +27,3 @@ spec:
                 name: public-app
                 port:
                   number: {{ .Values.Service.port }}
-

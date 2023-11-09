@@ -25,6 +25,3 @@ Config:
 
 Service:
   port: 8080
-
-TLS:
-  mail: dmitry.fedunets@gmail.com

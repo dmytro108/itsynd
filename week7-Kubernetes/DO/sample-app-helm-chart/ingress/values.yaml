@@ -1,0 +1,8 @@
+Config:
+  host: django-app.fedunets.uk
+
+Service:
+  port: 8080
+
+app-ingress-nginx:
+  namespaceOverride: "app-nginx-ingress"

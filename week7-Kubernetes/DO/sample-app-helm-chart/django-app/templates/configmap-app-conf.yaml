@@ -3,7 +3,7 @@ apiVersion: v1
 
 metadata:
   name: django-app-conf
-  namespace: {{ .Release.Name }}-django-app
+  namespace: {{ .Release.Name }}
 
 data:
   allowed_host: {{ .Values.Config.host }}

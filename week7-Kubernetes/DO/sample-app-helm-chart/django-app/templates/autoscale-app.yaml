@@ -3,7 +3,7 @@ apiVersion: autoscaling/v2
 
 metadata:
   name: sample-app-scale
-  namespace: {{ .Release.Name }}-django-app
+  namespace: {{ .Release.Name }}
   labels:
     app: django-sample
 

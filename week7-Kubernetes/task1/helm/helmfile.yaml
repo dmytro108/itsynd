@@ -1,0 +1,33 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: cert-manager
+    url: https://charts.jetstack.io
+
+releases:
+  - name: django-app
+    chart: ./django-app
+    version: "0.1.1"
+    namespace: django-app
+    createNamespace: true
+
+  - name: ingress-nginx
+    chart: ingress-nginx/ingress-nginx
+    #version: ""
+    namespace: ingress-nginx
+    createNamespace: true
+
+  - name: cert-manager
+    chart: cert-manager/cert-manager
+    version: "v1.13.2"
+    namespace: cert-manager
+    createNamespace: true
+    #set:
+    #  - installCRDs: true
+
+
+
+#    values:
+#      - v.yaml
+#    secrets:
+#      - ""

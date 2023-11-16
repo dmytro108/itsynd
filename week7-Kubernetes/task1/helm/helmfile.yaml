@@ -18,6 +18,12 @@ releases:
     chart: ingress-nginx/ingress-nginx
     namespace: ingress-nginx
     createNamespace: true
+    hooks:
+      - events: 
+        - postsync
+        showlogs: true
+        command: "/bin/bash"
+        args: ["-c", "./get-lb-ip.sh"]    
 
   - name: django-app
     chart: ./django-app
@@ -33,9 +39,3 @@ releases:
     needs:
       - cert-manager/cert-manager
       - ingress-nginx/ingress-nginx
-    hooks:
-      - events: 
-        - presync
-        showlogs: true
-        command: "/bin/bash"
-        args: ["-c", "./get-lb-ip.sh"]

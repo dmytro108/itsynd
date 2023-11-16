@@ -2,7 +2,7 @@
 
 while true; do
   echo "Polling the cluster for an external IP address..."
-  IP=$(kubectl get svc ingress-nginx-controller -o jsonpath={.status.loadBalancer.ingress[0].ip})
+  IP=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath={.status.loadBalancer.ingress[0].ip})
   
   # If IP is not empty, break the loop
   if [ -n "$IP" ]; then

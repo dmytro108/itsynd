@@ -1,0 +1,26 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: dyn-dns-update
+  namespace: django-app
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "3"
+    "helm.sh/hook-delete-policy": hook-succeeded  
+
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+      - name: namecheap-dns-upd
+        image: curlimages/curl:latest
+        command: ["curl",  
+        {{- $command := print .Values.Config.dyn_dns_endpoint "password=" .Values.dyn_dns_passw -}}
+        {{- $command := print $command "&host=" (trimSuffix "." (mustRegexFind "^(.*?)\\."  .Values.Config.host)) -}}
+        {{- $elements := splitList "." .Values.Config.host -}}
+        {{- $domain := join "." (slice $elements 1 (len $elements)) -}}
+        {{- $command := print $command "&domain=" $domain -}}
+        {{- $command := print $command "&ip=" .Values.lb_ip -}}
+        {{- $command | quote -}} ]
+      restartPolicy: Never

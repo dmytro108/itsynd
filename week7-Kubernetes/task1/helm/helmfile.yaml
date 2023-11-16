@@ -1,33 +1,41 @@
 repositories:
   - name: ingress-nginx
     url: https://kubernetes.github.io/ingress-nginx
-  - name: cert-manager
+  - name: jetstack
     url: https://charts.jetstack.io
 
 releases:
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    version: "v1.13.2"
+    namespace: cert-manager
+    createNamespace: true
+    set:
+      - name: installCRDs
+        value: true
+
+  - name: ingress-nginx
+    chart: ingress-nginx/ingress-nginx
+    namespace: ingress-nginx
+    createNamespace: true
+
   - name: django-app
     chart: ./django-app
     version: "0.1.1"
     namespace: django-app
     createNamespace: true
-
-  - name: ingress-nginx
-    chart: ingress-nginx/ingress-nginx
-    #version: ""
-    namespace: ingress-nginx
-    createNamespace: true
-
-  - name: cert-manager
-    chart: cert-manager/cert-manager
-    version: "v1.13.2"
-    namespace: cert-manager
-    createNamespace: true
-    #set:
-    #  - installCRDs: true
-
-
-
-#    values:
-#      - v.yaml
-#    secrets:
-#      - ""
+    values:
+      - django-app/values.yaml
+      - lb-ip.yaml
+    secrets:
+      - "django-app/db-url-secrets.yaml"
+      - "django-app/dyn-dns-passw-secrets.yaml"
+    needs:
+      - cert-manager/cert-manager
+      - ingress-nginx/ingress-nginx
+    hooks:
+      - events: 
+        - presync
+        showlogs: true
+        command: "/bin/bash"
+        args: ["-c", "./get-lb-ip.sh"]

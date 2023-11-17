@@ -6,7 +6,7 @@ metadata:
   name: app-ingress
   namespace: {{ .Release.Name }}
   annotations:
-    cert-manager.io/issuer: letsincrypt-prod
+    cert-manager.io/issuer: letsencrypt-prod
 
 spec:
   ingressClassName: nginx
@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.Config.host }}
-      secretName: letsincrypt-prod-cert
+      secretName: letsencrypt-prod-cert
 
   rules:
     - host: {{ .Values.Config.host }}

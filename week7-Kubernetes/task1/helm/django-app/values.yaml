@@ -21,7 +21,7 @@ HPA:
     memory: 80
 
 Config:
-  host: django-app.fedunets.uk
+  host: itsynd.fedunets.uk
   dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
 
 Service:

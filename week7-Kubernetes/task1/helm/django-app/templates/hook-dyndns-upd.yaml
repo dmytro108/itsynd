@@ -4,7 +4,7 @@ metadata:
   name: dyn-dns-update
   namespace: django-app
   annotations:
-    "helm.sh/hook": pre-install
+    "helm.sh/hook": pre-install, pre-upgrade
     "helm.sh/hook-weight": "0"
     "helm.sh/hook-delete-policy": hook-succeeded  
 
@@ -33,20 +33,25 @@ metadata:
   name: dyn-dns-check
   namespace: django-app
   annotations:
-    "helm.sh/hook": pre-install
+    "helm.sh/hook": pre-install, pre-upgrade
     "helm.sh/hook-weight": "3"
     "helm.sh/hook-delete-policy": hook-succeeded  
 
 spec:
-  ttlSecondsAfterFinished: 1000
+  ttlSecondsAfterFinished: 100
   template:
     spec:
       containers:
       - name: host-dns-check
         image: curlimages/curl:latest
+        # Ping the webserver, exit with success if responce code is 200 or 404. Means DNS works
+        # /bin/sh -c "until \
+        #              curl --connect-timeout 5 -L -o /dev/null \
+        #              -s -w '%{http_code}\n' http://<hostname> | grep -qE '200|404'; \
+        #            do sleep 5; done"
         command: ["/bin/sh", "-c",  
-        {{- $command := print "curl -L -o /dev/null -s -w '%{http_code}\n' http://" -}}
+        {{- $command := print "until curl  --connect-timeout 5 -L -o /dev/null -s -w '%{http_code}\n' http://" -}}
         {{- $command := print $command .Values.Config.host -}}
-        {{- $command := print $command " | grep -qE '200|404'" -}}
-        {{- $command | quote | quote -}} ]
+        {{- $command := print $command " | grep -qE '200|404'; do sleep 5; done" -}}
+        {{- $command | quote -}} ]
       restartPolicy: OnFailure

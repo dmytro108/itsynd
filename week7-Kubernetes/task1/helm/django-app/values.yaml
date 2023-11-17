@@ -1,9 +1,9 @@
-# Deployment vars
-Deployment:
-  replicas:
-    min: 2
-    max: 6
+# Application config
+Config:
+  host: week7.fedunets.uk
+  dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
 
+# App's container properties
 Container:
   version: latest
   port: 8000
@@ -15,17 +15,24 @@ Container:
       req: 200Mi
       lim: 512Mi
 
+# The app pods replicas number. 
+# Used in Pod Deployment and Pod Autoscaling 
+Deployment:
+  replicas:
+    min: 2
+    max: 6
+
+# Pod Autoscaling thresholds for CPU and Memory utilization
 HPA:
   target:
     cpu: 50
     memory: 80
 
-Config:
-  host: itsynd.fedunets.uk
-  dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
 
+# application Service port
 Service:
   port: 8080
 
+# Lets Encrypt registration data
 TLS:
   mail: dmitry.fedunets@gmail.com

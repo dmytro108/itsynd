@@ -1,23 +1,28 @@
 repositories:
-  - name: ingress-nginx
+  - name: k8s
     url: https://kubernetes.github.io/ingress-nginx
   - name: jetstack
     url: https://charts.jetstack.io
 
 releases:
+  # ------------------------- Cert-manager 
   - name: cert-manager
     chart: jetstack/cert-manager
     version: "v1.13.2"
     namespace: cert-manager
     createNamespace: true
+    # Installing CRDs is vital for the cert-manager
     set:
       - name: installCRDs
         value: true
 
+  # ------------------------- Ingress Nginx
   - name: ingress-nginx
-    chart: ingress-nginx/ingress-nginx
+    chart: k8s/ingress-nginx
     namespace: ingress-nginx
     createNamespace: true
+    # The hook polls the cluster until the ingress external IP has been assigned
+    # Than it writes the IP into variables file for the further using by django chart
     hooks:
       - events: 
         - postsync
@@ -25,6 +30,7 @@ releases:
         command: "/bin/bash"
         args: ["-c", "./get-lb-ip.sh"]    
 
+  # ------------------------- Django sample application
   - name: django-app
     chart: ./django-app
     version: "0.1.1"
@@ -36,6 +42,15 @@ releases:
     secrets:
       - "django-app/db-url-secrets.yaml"
       - "django-app/dyn-dns-passw-secrets.yaml"
+    # cert-manager and ingress-nginx charts should be installed before the application  
     needs:
       - cert-manager/cert-manager
       - ingress-nginx/ingress-nginx
+
+# ---------------------------- Helm settings
+# Set timeouts for the Job which checks that the ingress IP is accessable 
+# by the application FQDN
+helmDefaults:
+  wait: true
+  waitForJobs: true
+  timeout: 1800

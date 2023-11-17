@@ -13,5 +13,5 @@ while true; do
   sleep 2
 done
 
-# Writing the IP to a file
+# Writing the IP to variables file
 echo "lb_ip: $IP" > lb-ip.yaml

@@ -1,3 +1,6 @@
+# Updating the Dynamic DNS with the actual ingress IP address
+# Uses Namechap https API:
+# https://<namechap_endpoint>?password=<passw>&host=<app_hostname>&domain=<app_domain>&ip=<ingress_ip>
 kind: Job
 apiVersion: batch/v1
 metadata:
@@ -27,6 +30,8 @@ spec:
 
 ---
 
+# Checking if the ingress IP is available with the app's FQDN
+# The job is polling http://<app FQDN> untill it replys with any HTTP responce code (200, 404, 308)
 kind: Job
 apiVersion: batch/v1
 metadata:
@@ -44,14 +49,14 @@ spec:
       containers:
       - name: host-dns-check
         image: curlimages/curl:latest
-        # Ping the webserver, exit with success if responce code is 200 or 404. Means DNS works
+        # Ping the webserver
         # /bin/sh -c "until \
         #              curl --connect-timeout 5 -L -o /dev/null \
-        #              -s -w '%{http_code}\n' http://<hostname> | grep -qE '200|404'; \
+        #              -s -w '%{http_code}\n' http://<hostname> | grep -qE '200|404|308'; \
         #            do sleep 5; done"
         command: ["/bin/sh", "-c",  
         {{- $command := print "until curl  --connect-timeout 5 -L -o /dev/null -s -w '%{http_code}\n' http://" -}}
         {{- $command := print $command .Values.Config.host -}}
-        {{- $command := print $command " | grep -qE '200|404'; do sleep 5; done" -}}
+        {{- $command := print $command " | grep -qE '200|404|308'; do sleep 5; done" -}}
         {{- $command | quote -}} ]
       restartPolicy: OnFailure

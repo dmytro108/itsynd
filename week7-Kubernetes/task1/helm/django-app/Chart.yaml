@@ -10,7 +10,7 @@ keywords:
   - django
   - lets-encrypt
   - ingress-nginx
-home: https://github.com/dmytro108/itsynd/tree/master/week7-Kubernetes
+home: https://github.com/dmytro108/itsynd/tree/master/week7-Kubernetes/task1
 
 maintainers:
   - name: Dmitry Fedunets

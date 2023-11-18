@@ -16,7 +16,7 @@ spec:
 
   template:
     metadata:
-      namespace: {{ .Release.Name}}-django-app
+      namespace: {{ .Release.Name}}
       labels:
         app: django-sample
 

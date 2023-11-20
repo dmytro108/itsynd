@@ -143,7 +143,8 @@ helmDefaults:
 ```
 
 ### Chart parametrization
-All the application chart settings are in the [variable.yaml](helm/django-app/variables.yaml) file.
+All the application chart settings are in the [values.yaml](helm/django-app/values.yaml) file.
+
 
 ## Results
 ### TLS certificate

@@ -11,24 +11,12 @@ recursive:
 sections:
   show:
     - header
-    - providers
-    - resources
-    - requirements
-    - inputs
-    - outputs
 
 content: |-
   {{ .Header }}
   {{ include "docs/task.md" }}
+  ## Solution
   {{ include "docs/solution.md" }}
-  ### Reference
-  {{ .Requirements }}
-  {{ .Providers }}
-  {{ .Inputs }}
-  {{ .Outputs }}
-  {{ .Resources }}
-  ### Results
-  {{ include "docs/results.md" }}
 
 output:
   file: "README.md"

@@ -3,6 +3,8 @@ repositories:
     url: https://kubernetes.github.io/ingress-nginx
   - name: jetstack
     url: https://charts.jetstack.io
+  - name: sigs 
+    url: https://kubernetes-sigs.github.io/metrics-server    
 
 releases:
   # ------------------------- Cert-manager 
@@ -30,6 +32,13 @@ releases:
         command: "/bin/bash"
         args: ["-c", "./get-lb-ip.sh"]    
 
+  # ------------------------- HPA Metrics Server
+  - name: hpa-metrix
+    chart: sigs/metrics-server
+    namespace: metrics-server
+    createNamespace: true
+    version: "3.11.0"
+
   # ------------------------- Django sample application
   - name: django-app
     chart: ./django-app
@@ -46,6 +55,7 @@ releases:
     needs:
       - cert-manager/cert-manager
       - ingress-nginx/ingress-nginx
+      - metrics-server/hpa-metrix
 
 # ---------------------------- Helm settings
 # Set timeouts for the Job which checks that the ingress IP is accessable 

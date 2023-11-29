@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
   ports:
     - name: public-app-port
-      port: {{ .Values.Service.port }}
+      port: 8080
       targetPort: django-port
       protocol: TCP
   selector:

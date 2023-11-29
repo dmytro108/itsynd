@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+
+metadata:
+  name:       static-assests
+  namespace:  django-app
+  labels:
+    app:      static-web 
+
+spec:
+  #storageClassName: 
+  accessModes:
+  - ReadWriteOnce
+  #- ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi

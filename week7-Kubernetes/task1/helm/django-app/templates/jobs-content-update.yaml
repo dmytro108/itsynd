@@ -1,0 +1,70 @@
+kind: Job
+apiVersion: batch/v1
+
+metadata:
+  name: static-assets-init
+  namespace:  django-app
+  labels:
+    app:      static-web 
+
+spec:
+  template:
+    metadata:
+      namespace:  django-app
+      labels:
+        app: static-web
+    spec:
+      volumes:
+      - name: static-content
+        persistentVolumeClaim:
+          claimName: static-assests
+
+      containers:
+      - name: git
+        image: bitnami/git:latest
+        command: ["/bin/bash",
+                  "-c",
+                  "cd /static && git init && git remote add -f origin https://github.com/dmytro108/sample-django.git && git config core.sparsecheckout true && echo /static/ > .git/info/sparse-checkout && git pull origin main"]
+        volumeMounts:
+        - name:  static-content
+          mountPath:  /static
+          readOnly: false
+      restartPolicy: OnFailure
+
+#---
+#
+#kind: CronJob
+#apiVersion: batch/v1
+#
+#metadata:
+#  name: static-assets-update
+#  namespace:  django-app
+#  labels:
+#    app:      static-web 
+#
+#spec:
+#  schedule: "*/2 * * * *"
+#
+#  jobTemplate:
+#    metadata:
+#      name: static-assets-upd
+#      namespace:  django-app
+#
+#    spec:
+#      template:
+#        spec:
+#          volumes:
+#          - name: static-content
+#            persistentVolumeClaim:
+#              claimName: static-assests
+#          containers:
+#          - name: git-upd
+#            image: bitnami/git:latest
+#            command: ["/bin/bash",
+#                  "-c",
+#                  "cd /static && git pull origin main"]
+#            volumeMounts:
+#              - name:  static-content
+#                mountPath:  /static
+#                readOnly: false
+#          restartPolicy: OnFailure

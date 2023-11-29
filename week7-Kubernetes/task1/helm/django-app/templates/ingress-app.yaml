@@ -20,10 +20,12 @@ spec:
     - host: {{ .Values.Config.host }}
       http:
         paths:
-          - path: /
+        {{- range .Values.IngressPaths }}
+          - path: {{ .path }}
             pathType: Prefix
             backend:
               service:
-                name: public-app
+                name: {{ .backend.service }}
                 port:
-                  number: {{ .Values.Service.port }}
+                  number: {{ .backend.port }}
+        {{- end }}

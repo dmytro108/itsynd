@@ -1,0 +1,71 @@
+kind:       Deployment
+apiVersion: apps/v1
+
+metadata:
+  name:       static-web
+  namespace:  django-app
+  labels:
+    app:      static-web
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-web
+
+  template:
+    metadata: 
+      namespace:  django-app
+      labels: 
+        app:      static-web
+
+    spec:
+      volumes:
+        - name: static-content
+          persistentVolumeClaim:
+              claimName: static-assests
+        - name: nginx-conf
+          configMap:
+            name: static-web-conf
+
+      initContainers:
+        - name: pv-permission-fix
+          image: busybox
+          command: ["/bin/chmod","-R","777", "/data"]
+          volumeMounts:
+          - name: static-content
+            mountPath: /data
+
+      containers:
+        - name:  static-web-nginx
+          image: nginx
+          volumeMounts:
+          - name:       static-content
+            mountPath:  /mnt
+            readOnly:   true
+          - name:       nginx-conf
+            mountPath:  /etc/nginx/conf.d
+            readOnly:   true
+          resources:
+            limits:
+              cpu:    200m
+              memory: 500Mi
+            requests:
+              cpu:    100m
+              memory: 200Mi
+          ports:
+          - containerPort:  80
+            name:           http
+#          livenessProbe:
+#            httpGet:
+#              path:              /static
+#              port:              http
+#            initialDelaySeconds: 5
+#            timeoutSeconds:      10
+#
+#          readinessProbe:
+#            httpGet:
+#              path:               /static
+#              port:               http
+#            initialDelaySeconds:  5
+#            timeoutSeconds:       10

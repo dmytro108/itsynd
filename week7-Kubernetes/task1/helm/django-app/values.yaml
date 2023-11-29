@@ -36,3 +36,17 @@ Service:
 # Lets Encrypt registration data
 TLS:
   mail: dmitry.fedunets@gmail.com
+
+# Ingress paths
+
+IngressPaths:
+- name: app
+  path: /
+  backend:
+    service:  public-app
+    port: 8080
+- name: static
+  path: /static
+  backend:
+    service: static-web-server
+    port: 8888

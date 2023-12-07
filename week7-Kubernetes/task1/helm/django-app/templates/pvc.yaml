@@ -1,17 +1,18 @@
+# Persistance volume claim for static assets filles
 kind: PersistentVolumeClaim
 apiVersion: v1
 
 metadata:
-  name:       static-assests
-  namespace:  django-app
+  name:       static-assets
+  namespace:  {{ .Release.Name }}
   labels:
     app:      static-web 
 
 spec:
-  #storageClassName: 
+# It uses the standard DigitalOcean Starage Class - do-block-storage, 
+# which supports RWO only
   accessModes:
   - ReadWriteOnce
-  #- ReadOnlyMany
   resources:
     requests:
-      storage: 1Gi
+      storage:  {{ .Values.Static_assets.storage_size }}

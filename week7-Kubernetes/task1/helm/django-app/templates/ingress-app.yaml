@@ -20,6 +20,7 @@ spec:
     - host: {{ .Values.Config.host }}
       http:
         paths:
+        # Dynamicaly creates ingress routes
         {{- range .Values.IngressPaths }}
           - path: {{ .path }}
             pathType: Prefix

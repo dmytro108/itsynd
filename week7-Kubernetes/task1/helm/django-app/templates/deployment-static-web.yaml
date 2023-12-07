@@ -3,19 +3,19 @@ apiVersion: apps/v1
 
 metadata:
   name:       static-web
-  namespace:  django-app
+  namespace:  {{ .Release.Name }}
   labels:
     app:      static-web
 
 spec:
-  replicas: 1
+  replicas: {{ .Values.Deployment.replicas.min }}
   selector:
     matchLabels:
       app: static-web
 
   template:
     metadata: 
-      namespace:  django-app
+      namespace:  {{ .Release.Name }}
       labels: 
         app:      static-web
 
@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: static-content
           persistentVolumeClaim:
-              claimName: static-assests
+              claimName: static-assets
         - name: nginx-conf
           configMap:
             name: static-web-conf
@@ -48,24 +48,23 @@ spec:
             readOnly:   true
           resources:
             limits:
-              cpu:    200m
-              memory: 500Mi
-            requests:
-              cpu:    100m
-              memory: 200Mi
+              cpu:  {{ .Values.Container.resources.cpu.req }}
+              memory: {{ .Values.Container.resources.memory.req }}
+            limits:
+              cpu: {{ .Values.Container.resources.cpu.lim }}
+              memory: {{ .Values.Container.resources.memory.lim }}
           ports:
           - containerPort:  80
             name:           http
-#          livenessProbe:
-#            httpGet:
-#              path:              /static
-#              port:              http
-#            initialDelaySeconds: 5
-#            timeoutSeconds:      10
-#
-#          readinessProbe:
-#            httpGet:
-#              path:               /static
-#              port:               http
-#            initialDelaySeconds:  5
-#            timeoutSeconds:       10
+          livenessProbe:
+            httpGet:
+              path:              /static
+              port:              http
+            initialDelaySeconds: 5
+            timeoutSeconds:      10
+          readinessProbe:
+            httpGet:
+              path:               /static
+              port:               http
+            initialDelaySeconds:  5
+            timeoutSeconds:       10

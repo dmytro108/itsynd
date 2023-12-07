@@ -3,7 +3,7 @@ apiVersion: v1
 
 metadata:
   name:       static-web-server
-  namespace:  django-app
+  namespace:  {{ .Release.Name }}
 
 spec:
   type:  ClusterIP

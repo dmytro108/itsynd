@@ -38,15 +38,29 @@ TLS:
   mail: dmitry.fedunets@gmail.com
 
 # Ingress paths
-
+# Dynamicaly creates routes in the ingress definition
+# Add a new route definition:
+# - path: <site route>
+#   backend:
+#     service: <service name>
+#     port: <service port>
 IngressPaths:
-- name: app
-  path: /
+- path: /
   backend:
     service:  public-app
     port: 8080
-- name: static
-  path: /static
+- path: /static
   backend:
     service: static-web-server
     port: 8888
+
+#
+Static_assets:
+  storage_size: 1Gi
+  git_url: 
+  dir_name:
+
+# Static assets storage size
+static_assets_storage_size: 1Gi
+
+# Static assets Git repo

@@ -25,7 +25,7 @@ spec:
 
       containers:
         - name: django-app
-          image: registry.digitalocean.com/sample-django-app/app:latest
+          image: {{ print .Values.image.repository ":" .Values.image.tag }}
           resources:
             requests:
               cpu:  {{ .Values.Container.resources.cpu.req }}
@@ -73,7 +73,6 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
-            runAsUser: 999
             capabilities:
               drop:
                 - NET_RAW

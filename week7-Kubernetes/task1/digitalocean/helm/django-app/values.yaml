@@ -3,6 +3,12 @@ Config:
   host: week7.fedunets.uk
   dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
 
+# App Image reference in Docker registry
+image:
+  registry: docker
+  repository: dmytro108/django-app
+  tag: latest
+
 # App's container properties
 Container:
   version: latest
@@ -54,13 +60,11 @@ IngressPaths:
     service: static-web-server
     port: 8888
 
-#
+# Static web assets
 Static_assets:
+  # PV storage size
   storage_size: 1Gi
-  git_url: 
-  dir_name:
-
-# Static assets storage size
-static_assets_storage_size: 1Gi
-
-# Static assets Git repo
+  # Static assets Repo URL
+  git_url: "https://github.com/dmytro108/sample-django.git"
+  # Static assets folder name relatively to the repo
+  dir_name: "/static"

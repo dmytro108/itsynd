@@ -36,18 +36,18 @@ spec:
         # ---------- Health check
         readinessProbe:
           exec:
-            command:
-            - pg_isready
-            - -U
-            - $(POSTGRES_USER)
+            command: 
+            - bash
+            - -c
+            - 'pg_isready -U $POSTGRES_USER -d $POSTGRES_DB'
           initialDelaySeconds: 5
           periodSeconds: 5
         livenessProbe:
           exec:
             command:
-            - pg_isready
-            - -U
-            - $(POSTGRES_USER)
+            - bash
+            - -c
+            - 'pg_isready -U $POSTGRES_USER -d $POSTGRES_DB'
           initialDelaySeconds: 30
           periodSeconds: 5
         # ----------- Storrage

@@ -1,0 +1,31 @@
+kind: ConfigMap
+apiVersion: v1
+
+metadata:
+  name: django-app-conf
+  namespace: {{ .Release.Name }}
+
+data:
+  allowed_host: {{ .Values.Config.host }}
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+
+metadata:
+  name: static-web-conf
+  namespace: {{ .Release.Name }}
+
+data:
+  static-web.conf: |
+    server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+      location /static/ {
+          alias   /mnt/static/;
+          index  index.html index.htm;
+          try_files $uri $uri/ =404;
+      }
+    }

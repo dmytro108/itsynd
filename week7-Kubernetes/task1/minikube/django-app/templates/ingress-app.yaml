@@ -1,0 +1,32 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+
+metadata:
+  name: app-ingress
+  namespace: {{ .Release.Name }}
+  annotations:
+    #cert-manager.io/issuer: letsencrypt-prod
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - {{ .Values.Config.host }}
+      secretName: letsencrypt-prod-cert
+
+  rules:
+    - host: {{ .Values.Config.host }}
+      http:
+        paths:
+        # Dynamicaly creates ingress routes
+        {{- range .Values.IngressPaths }}
+          - path: {{ .path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .backend.service }}
+                port:
+                  number: {{ .backend.port }}
+        {{- end }}

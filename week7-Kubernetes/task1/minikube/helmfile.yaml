@@ -1,0 +1,36 @@
+releases:
+
+# ------------------------- PostgreSQL DB
+- name: postgres
+  chart: ./rdb
+  version: "0.0.1"
+  namespace: postgres
+  createNamespace: true
+  secrets:
+    - "secrets-db.yaml"
+  values:
+    - "rdb/values.yaml"
+    - "db-values.yaml"
+
+# ------------------------- Django sample application
+- name: django-app
+  chart: ./django-app
+  version: "0.1.1"
+  namespace: django-app
+  createNamespace: true
+  values:
+    - "django-app/values.yaml"
+    - "db-values.yaml"    
+  secrets:
+    - "secrets-db.yaml"
+  # db chart should be installed before the application  
+  needs:
+    - postgres/postgres
+
+# ---------------------------- Helm settings
+# Set timeouts for the Job which checks that the ingress IP is accessable 
+# by the application FQDN
+helmDefaults:
+  wait: true
+  waitForJobs: true
+  timeout: 1800

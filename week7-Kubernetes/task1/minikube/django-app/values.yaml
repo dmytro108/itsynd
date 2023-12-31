@@ -1,0 +1,70 @@
+# Application config
+Config:
+  host: week7.fedunets.uk
+  dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
+
+# App Image reference in Docker registry
+image:
+  registry: docker
+  repository: dmytro108/django-app
+  tag: latest
+
+# App's container properties
+Container:
+  version: latest
+  port: 8000
+  resources:
+    cpu:
+      req: 400m
+      lim: 500m
+    memory:
+      req: 200Mi
+      lim: 512Mi
+
+# The app pods replicas number. 
+# Used in Pod Deployment and Pod Autoscaling 
+Deployment:
+  replicas:
+    min: 2
+    max: 6
+
+# Pod Autoscaling thresholds for CPU and Memory utilization
+HPA:
+  target:
+    cpu: 50
+    memory: 80
+
+
+# application Service port
+Service:
+  port: 8080
+
+# Lets Encrypt registration data
+TLS:
+  mail: dmitry.fedunets@gmail.com
+
+# Ingress paths
+# Dynamicaly creates routes in the ingress definition
+# Add a new route definition:
+# - path: <site route>
+#   backend:
+#     service: <service name>
+#     port: <service port>
+IngressPaths:
+- path: /
+  backend:
+    service:  public-app
+    port: 8080
+- path: /static
+  backend:
+    service: static-web-server
+    port: 8888
+
+# Static web assets
+Static_assets:
+  # PV storage size
+  storage_size: 1Gi
+  # Static assets Repo URL
+  git_url: "https://github.com/dmytro108/sample-django.git"
+  # Static assets folder name relatively to the repo
+  dir_name: "/static"

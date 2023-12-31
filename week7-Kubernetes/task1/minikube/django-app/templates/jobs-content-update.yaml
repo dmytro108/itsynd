@@ -1,0 +1,71 @@
+# Initialy checks out the static assets from the Git repo
+kind: Job
+apiVersion: batch/v1
+
+metadata:
+  name: static-assets-init
+  namespace:  {{ .Release.Name }}
+  labels:
+    app:      static-web 
+
+spec:
+  template:
+    metadata:
+      namespace:  {{ .Release.Name }}
+      labels:
+        app: static-web
+    spec:
+      volumes:
+      - name: static-content
+        persistentVolumeClaim:
+          claimName: static-assets
+
+      containers:
+      - name: git
+        image: bitnami/git:latest
+        # Checks out only folder with the static assets files
+        command: ["/bin/bash",
+                  "-c",
+                  "cd /static && git init && git remote add -f origin {{ .Values.Static_assets.git_url }} && git config core.sparsecheckout true && echo {{ .Values.Static_assets.dir_name }}/ > .git/info/sparse-checkout && git pull origin main"]
+        volumeMounts:
+        - name:  static-content
+          mountPath:  /static
+          readOnly: false
+      restartPolicy: OnFailure
+
+---
+# Updating static assets from the repo every 2 minutes
+kind: CronJob
+apiVersion: batch/v1
+
+metadata:
+  name: static-assets-update
+  namespace:  {{ .Release.Name }}
+  labels:
+    app:      static-web 
+
+spec:
+  schedule: "*/2 * * * *"
+
+  jobTemplate:
+    metadata:
+      name: static-assets-upd
+      namespace:  django-app
+    spec:
+      template:
+        spec:
+          volumes:
+          - name: static-content
+            persistentVolumeClaim:
+              claimName: static-assets
+          containers:
+          - name: git-upd
+            image: bitnami/git:latest
+            command: ["/bin/bash",
+                  "-c",
+                  "cd /static && git pull origin main"]
+            volumeMounts:
+              - name:  static-content
+                mountPath:  /static
+                readOnly: false
+          restartPolicy: OnFailure

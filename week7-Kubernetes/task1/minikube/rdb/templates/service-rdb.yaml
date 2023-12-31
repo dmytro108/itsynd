@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: {{ .Values.DB.Host }}
+  namespace: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+
+  selector:
+    db: postgres
+
+  ports:
+  - name: postgres
+    port: {{ .Values.DB.Port }}
+    targetPort: {{ .Values.DB.Port }}

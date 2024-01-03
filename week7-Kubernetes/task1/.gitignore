@@ -38,4 +38,10 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Ignore Helm Chart lock files
+*.lock
+charts/*.tgz
+# Ignore terraform-client settings file
+.terraform-client-settings.json
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

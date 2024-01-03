@@ -40,7 +40,7 @@ terraform.rc
 
 # Ignore Helm Chart lock files
 *.lock
-charts/*.tgz
+**/charts/*.tgz
 # Ignore terraform-client settings file
 .terraform-client-settings.json
 

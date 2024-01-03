@@ -1,3 +1,4 @@
+{{- define "db-credentials.secret" -}}
 kind: Secret
 apiVersion: v1
 
@@ -9,3 +10,4 @@ type: Opaque
 stringData:
   POSTGRES_USER: {{ .Values.postgresUser }}
   POSTGRES_PASSWORD: {{ .Values.postgresPassword }}
+{{- end -}}

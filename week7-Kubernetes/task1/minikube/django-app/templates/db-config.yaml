@@ -1,0 +1,3 @@
+{{- include "db-credentials.secret" . | nindent 0 }}
+---
+{{- include "db-config.cm" . | nindent 0 }}

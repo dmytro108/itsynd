@@ -1,19 +1,10 @@
 apiVersion: v2
-name: rdb-chart
-description: A Helm chart for Kubernetes
-type: application
+name: db-configuration
+description: A helpers library for configuration access to the DB
+type: library
 
 version: "0.0.1"
-appVersion: "15.0.0"
 
-
-dependencies:
-- name: db-configuration
-  version: "0.0.1"
-  repository: file://../helpers
-  
-keywords:
-  - PostgreSQL
 home: https://github.com/dmytro108/itsynd/tree/master/week7-Kubernetes/task1
 
 maintainers:

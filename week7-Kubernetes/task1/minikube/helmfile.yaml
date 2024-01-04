@@ -27,6 +27,22 @@ releases:
   needs:
     - postgres/postgres
 
+# ------------------------- Django sample application 2
+- name: django-app2
+  chart: ./django-app
+  version: "0.1.1"
+  namespace: django-app2
+  createNamespace: true
+  values:
+    - "django-app/values.yaml"
+    - "db-values.yaml"   
+    - "app2-values.yaml" 
+  secrets:
+    - "secrets-db.yaml"
+  # db chart should be installed before the application  
+  needs:
+    - postgres/postgres
+
 # ---------------------------- Helm settings
 # Set timeouts for the Job which checks that the ingress IP is accessable 
 # by the application FQDN

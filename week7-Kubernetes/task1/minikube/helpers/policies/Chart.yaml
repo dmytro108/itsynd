@@ -1,0 +1,13 @@
+apiVersion: v2
+name: npol-default
+description: A helpers library for configuration access to the DB
+type: library
+
+version: "0.0.1"
+
+home: https://github.com/dmytro108/itsynd/tree/master/week7-Kubernetes/task1
+
+maintainers:
+  - name: Dmitry Fedunets
+    email: dmitry.fedunets@gmail.com
+    url: https://github.com/dmytro108/

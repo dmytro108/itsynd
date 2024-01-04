@@ -9,7 +9,10 @@ appVersion: "0.2.1"
 dependencies:
 - name: db-configuration
   version: "0.0.1"
-  repository: file://../helpers/db-conf  
+  repository: file://../helpers/db-conf
+- name: npol-default
+  version: "0.0.1"
+  repository: file://../helpers/policies
 
 keywords:
   - django

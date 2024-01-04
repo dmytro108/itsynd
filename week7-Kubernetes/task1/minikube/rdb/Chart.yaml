@@ -10,7 +10,7 @@ appVersion: "15.0.0"
 dependencies:
 - name: db-configuration
   version: "0.0.1"
-  repository: file://../helpers
+  repository: file://../helpers/db-conf
   
 keywords:
   - PostgreSQL

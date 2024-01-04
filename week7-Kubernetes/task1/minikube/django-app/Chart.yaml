@@ -9,7 +9,7 @@ appVersion: "0.2.1"
 dependencies:
 - name: db-configuration
   version: "0.0.1"
-  repository: file://../helpers
+  repository: file://../helpers/db-conf  
 
 keywords:
   - django

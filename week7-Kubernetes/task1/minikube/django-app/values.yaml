@@ -1,7 +1,6 @@
 # Application config
 Config:
   host: week7.fedunets.uk
-  dyn_dns_endpoint: "https://dynamicdns.park-your-domain.com/update?"
 
 # App Image reference in Docker registry
 image:
@@ -38,10 +37,6 @@ HPA:
 # application Service port
 Service:
   port: 8080
-
-# Lets Encrypt registration data
-TLS:
-  mail: dmitry.fedunets@gmail.com
 
 # Ingress paths
 # Dynamicaly creates routes in the ingress definition

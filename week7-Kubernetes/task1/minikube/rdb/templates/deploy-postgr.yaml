@@ -16,6 +16,8 @@ spec:
         tier: db
 
     spec:
+      serviceAccountName: sa-db
+      #serviceAccountName: default
       volumes:
       - name: db-storage
         persistentVolumeClaim:

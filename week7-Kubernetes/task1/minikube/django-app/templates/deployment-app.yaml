@@ -21,11 +21,13 @@ spec:
         app: django-sample
 
     spec:
+      serviceAccountName: sa-django-app
       restartPolicy: Always
 
       containers:
         - name: django-app
           image: {{ print .Values.image.repository ":" .Values.image.tag }}
+          imagePullPolicy: Always
           # ------------ Resources
           resources:
             requests:

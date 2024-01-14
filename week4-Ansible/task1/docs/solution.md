@@ -6,6 +6,7 @@ The following diagram represents the resulted infrastructure:
 ![infrastructre](docs/infra.png)
 
 **Fierwall diagram:**
+The following diagram represents the resulted firewall rules:
 ![fierwall](docs/fw.png)
 
 #### Setup SSM

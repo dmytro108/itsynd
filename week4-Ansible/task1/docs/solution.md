@@ -5,7 +5,7 @@ The infrastructure includes AWS service endpoints which are neccesery for connec
 The following diagram represents the resulted infrastructure:
 ![infrastructre](docs/infra.png)
 
-Fierwall diagram:
+**Fierwall diagram:**
 ![fierwall](docs/fw.png)
 
 #### Setup SSM

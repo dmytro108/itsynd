@@ -1,6 +1,6 @@
-#### Deploy and Configure Infrastructure Using Terraform and Ansible
-##### Scenario:
-Imagine you're a DevOps engineer tasked to deploy and set up servers for a new application
+## Deploy and Configure Infrastructure Using Terraform and Ansible
+### Task:
+As a DevOps engineer tasked to deploy and set up servers for a new application
 that requires a database. For this, we'll be deploying a [Django sample app from the
 DigitalOcean team:](https://github.com/digitalocean/sample-django).
 

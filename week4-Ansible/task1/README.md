@@ -1,9 +1,8 @@
 <!-- BEGIN_TF_DOCS -->
-# IT Syndicate Boot Camp
-## Week 4. Task 1.
-#### Deploy and Configure Infrastructure Using Terraform and Ansible
-##### Scenario:
-Imagine you're a DevOps engineer tasked to deploy and set up servers for a new application
+# Portfolio project
+## Deploy and Configure Infrastructure Using Terraform and Ansible
+### Task:
+As a DevOps engineer tasked to deploy and set up servers for a new application
 that requires a database. For this, we'll be deploying a [Django sample app from the
 DigitalOcean team:](https://github.com/digitalocean/sample-django).
 
@@ -23,8 +22,8 @@ For Ansible, you need to create three roles - two for setting up the infrastruct
 1. The deployment role should update the code from GitHub, update the configuration with the current DB credentials, and perform DB migrations.
 
 Run these roles using the AWS EC2 System Manager. [Here, you can check how](https://aws.amazon.com/blogs/mt/running-ansible-playbooks-using-ec2-systems-manager-run-command-and-state-manager/).
-### Solution
-#### AWS infrastructure
+## Solution
+### AWS infrastructure
 The requested infrastructure was built on top of the basic ifrastructure which already had been created. I utilized Terraform remote state to get access to the basic infrastructure.
 The infrastructure includes AWS service endpoints which are neccesery for connecting instances without public IP addreses but placed in public subnets to the SSM service.
 The following diagram represents the resulted infrastructure:
@@ -57,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "ssm_mamaged_ec24ssm" {
 ```
 ![ssm](docs/2023-09-23_23h49_59.png)
 
-#### Ansible inventory
+### Ansible inventory
 Ansible [inventory file](ansible/inventory) is generating automaticaly from the [Terraform configuration](inventory.tf) utilizing Terraform resource local_file and processing a [template file](inventory.tftpl).
 
 Template file:
@@ -88,13 +87,13 @@ resource "local_file" "ansible_inventory" {
   filename = var.inventory_file
 }
 ```
-#### Ansible Plays
+### Ansible Plays
 **Connection to controlling nodes**
 I did not use AWS SSM for running Ansible Playbooks as it was in the task because although this is a secure but slow and inconvinient way from debuging and development perspective.
 I used more traditional way of ssh agent forwarding through the Bastion host.
 As far I know there is a way combaining high security but still providing ability to work directly through ssh tunnel, [described here](https://medium.com/@shyam.rughani30/revolutionizing-access-no-more-bastion-hosts-with-aws-private-endpoint-3d7352a4dbe7). Unfortunately, I  had no chance to try this but definately it worths tryng in the future.
 
-**Project highlights**
+## Project highlights
 1. Idempotency - The playbook does not have any task using shell or command modules. This ensures the playbook is 100% idempotent.
 2. Transfering variables across plays and roles. In the playbook I have two plays working with different inventory groups. One play works with DB server and another with application servers. There was a problem how to pass the DB connection string generated on the database host to the application hosts. I used a "dummy host" as a variable storage accessable in all roles.
 The [database setup task](ansible/roles/infra_setup/tasks/setup_db.yml) in the [infra_setup role](ansible/roles/infra_setup/tasks/main.yml) from [Install and Setup PostgreSQL play](ansible/playbook.yml):
@@ -112,7 +111,6 @@ deploy_app_db_url: "{{ hostvars['dummy']['db_url_'] }}"
 ```yaml
 infra_setup_db_user_passw: "{{ lookup('ansible.builtin.password', '/dev/null', seed=inventory_hostname) }}"
 ```
-### Results
 
 ### Reference
 #### Requirements

@@ -1,2 +1,1 @@
-# IT Syndicate Boot Camp
-## Week 7. Task 1
+# Portfolio Project: Deploying a Django application in a managed Kubernetes cluster

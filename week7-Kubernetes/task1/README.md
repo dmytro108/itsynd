@@ -160,9 +160,39 @@ echo "lb_ip: $IP" > lb-ip.yaml
 ```
 #### Updating DNS
 A [Job `dyn-dns-update`](digitalocean/helm/django-app/templates/hook-dyndns-upd.yaml) configured as a Helm pre-installation and pre-upgrade hook. It utilizes Namecheap Dynamic DNS API to update the defined application domain name with the new external API. The Namecheap API credentials configuration created with SOPS editor and encrypted with GPG. 
+```yaml
+      containers:
+      - name: namecheap-dns-upd
+        image: curlimages/curl:latest
+        # Uses Namecheap https API:
+        # https://<namechap_endpoint>?password=<passw>&host=<app_hostname>&domain=<app_domain>&ip=<ingress_ip>
+        command: ["curl",  
+        {{- $command := print .Values.Config.dyn_dns_endpoint "password=" .Values.dyn_dns_passw -}}
+        {{- $command := print $command "&host=" (trimSuffix "." (mustRegexFind "^(.*?)\\."  .Values.Config.host)) -}}
+        {{- $elements := splitList "." .Values.Config.host -}}
+        {{- $domain := join "." (slice $elements 1 (len $elements)) -}}
+        {{- $command := print $command "&domain=" $domain -}}
+        {{- $command := print $command "&ip=" .Values.lb_ip -}}
+        {{- $command | quote -}} ]
+```
 
 #### Check the application domain
 Before requesting Lets Encrypt for issuing the certificate we should make sure the defined domain is accessable with the new external IP. I use another [Job `dyn-dns-check`](digitalocean/helm/django-app/templates/hook-dyndns-upd.yaml) to poll the domain untill it responds with any HTTP responce code. If it is a first installation I expect to receive 404 responce froom Nginx ingres controller because of the application has not been installed yet.
+```yaml
+      containers:
+      - name: host-dns-check
+        image: curlimages/curl:latest
+        # Ping the webserver
+        # /bin/sh -c "until \
+        #              curl --connect-timeout 5 -L -o /dev/null \
+        #              -s -w '%{http_code}\n' http://<hostname> | grep -qE '200|404|308'; \
+        #            do sleep 5; done"
+        command: ["/bin/sh", "-c",  
+        {{- $command := print "until curl  --connect-timeout 5 -L -o /dev/null -s -w '%{http_code}\n' http://" -}}
+        {{- $command := print $command .Values.Config.host -}}
+        {{- $command := print $command " | grep -qE '200|404|308'; do sleep 5; done" -}}
+        {{- $command | quote -}} ]
+```
 
 #### Hooks Timeouts
 Waiting for the application domain is accessable takes time. I had to encrease helmfile settings of Helm timeouts for Job execution:

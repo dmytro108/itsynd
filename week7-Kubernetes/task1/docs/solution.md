@@ -52,7 +52,28 @@ maxReplicas: 6
 ```
 ### Application settings and Secrets
 All application settings are propagated to the application container from [Configmap `django-map-conf`](digitalocean/helm/django-app/templates/configmap-app-conf.yaml). 
-The sample application requires an access to a PostgreSQl database. Here a managed Digital Ocean DB was provided. The database connection string including the db address and credentials stored in [Secret `db-connect`](digitalocean/helm/django-app/templates/secrets.yaml). The secret manifest was created by SOPS editor and  encrypted with a GPG key. 
+The sample application requires an access to a PostgreSQl database. Here a managed Digital Ocean DB was provided. The database connection string including the db address and credentials stored in [Secret `db-connect`](digitalocean/helm/django-app/templates/secrets.yaml). The secret manifest was created by SOPS editor and encrypted with a GPG key to securely store in the repository. 
+```yaml
+db_url: ENC[AES256_GCM,data:IYhn...ktkQH,iv:Pbzl...lA= tag:KMRpd8FJVwC6a/aE0nrxqQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-13T21:16:47Z"
+    mac: ENC[AES256_GCM,data:ZD2F...RNQ=,iv:Rn...+NY=,tag:sLA...BbA==,type:str]
+    pgp:
+        - created_at: "2023-11-13T21:15:10Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQE...ca3
+            -----END PGP MESSAGE-----
+          fp: 57CB9AC86D23218AE4C9DF47365F1D249528952D
+    unencrypted_suffix: _unencrypted
+    version: 3.8.1
+```
 
 ### HTTP/HTTPS access
 The access to the application is provided by Nginx ingress controller. The application [Service `public-app`](digitalocean/helm/django-app/templates/service-app.yaml) exposes port *:8080 while the application endpoints are accessable on port *:8000. By default the [Ingres `app-ingress`](digitalocean/helm/django-app/templates/ingress-app.yaml) routes all requests `week7.fedunets.uk/*` to the Service `public-app`:
@@ -125,10 +146,10 @@ helmDefaults:
   timeout: 1800
 ```
 ### Static content
-The application has a static content which should be served by Nginx. I use a persistent volume to store the static content and mount it to the Nginx container. The content is automaticaly deploying from a github repositaryby by a [Job `static-assets-init`](digitalocean/helm/django-app/templates/job-content-update.yaml) and is regulay updating with a CronJob `static-assets-update`. The initial Job, updating CronJob and the Nginx pod share the same persistent volume.
+The application has a static content which should be served by Nginx. I use a persistent volume to store the static content and mount it to the Nginx container. The content is automaticaly deploying from a github repositaryby by a [Job `static-assets-init`](digitalocean/helm/django-app/templates/job-content-update.yaml) and is regulay updating with a CronJob `static-assets-update`. The initial Job, updating CronJob and the Nginx pod share the same persistent volume. The Nginx configuration is defined in the ConfigMap and mounted to the Nginx container.
 
 ### Dynamic Ingress routing
-I use Helm `range` loop to generate Ingress paths for each application service defined in the [values.yaml]((digitalocean/helm/django-app/values.yaml). The [Ingress template](digitalocean/helm/django-app/templates/ingress-app.yaml) looks like:
+I use Helm `range` loop to generate Ingress paths for each application service defined in the [values.yaml](digitalocean/helm/django-app/values.yaml). The [Ingress template](digitalocean/helm/django-app/templates/ingress-app.yaml) looks like:
 ```yaml
   rules:
     - host: {{ .Values.Config.host }}

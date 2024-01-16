@@ -1,3 +1,4 @@
+## Solution
 ### Cluster configuration:
 I created DigitalOcean Kubernetes cluster with 3 worker nodes. Each node has:
 ```yaml
@@ -122,6 +123,39 @@ helmDefaults:
   wait: true
   waitForJobs: true
   timeout: 1800
+```
+### Static content
+The application has a static content which should be served by Nginx. I use a persistent volume to store the static content and mount it to the Nginx container. The content is automaticaly deploying from a github repositaryby by a [Job `static-assets-init`](digitalocean/helm/django-app/templates/job-content-update.yaml) and is regulay updating with a CronJob `static-assets-update`. The initial Job, updating CronJob and the Nginx pod share the same persistent volume.
+
+### Dynamic Ingress routing
+I use Helm `range` loop to generate Ingress paths for each application service defined in the [values.yaml]((digitalocean/helm/django-app/values.yaml). The [Ingress template](digitalocean/helm/django-app/templates/ingress-app.yaml) looks like:
+```yaml
+  rules:
+    - host: {{ .Values.Config.host }}
+      http:
+        paths:
+        # Dynamicaly creates ingress routes
+        {{- range .Values.IngressPaths }}
+          - path: {{ .path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .backend.service }}
+                port:
+                  number: {{ .backend.port }}
+        {{- end }}
+```
+and the services defined in the values file:
+```yaml
+IngressPaths:
+- path: /
+  backend:
+    service:  public-app
+    port: 8080
+- path: /static
+  backend:
+    service: static-web-server
+    port: 8888
 ```
 
 ### Chart parametrization

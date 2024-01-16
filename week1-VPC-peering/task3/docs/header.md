@@ -1,2 +1,1 @@
-# IT Syndicate Boot Camp
-## Week 1. Task 3
+# Portfolio Project: Configuring peering between VPCs on AWS with Terraform.

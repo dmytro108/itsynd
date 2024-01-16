@@ -13,15 +13,15 @@ This solution extends the original task by allowing you to create any number of 
 The [vpc module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest) is configured with `count` parametr to create the given number of VPCs resulting in an array of created VPCs.
 
 Along with a number of VPCs to create a base CIDR must be specified. The configuration generate all the CIDRs for private and public subnets for each VPC based on the single given CIDR.
-For instance, if a base CIDR 10.0.0.0 was specified and two VPCs are to create, it will create:
-VPC[0]:
-  CIDR: 10.0.0.0/16
-  private subnet: 10.0.0.0/24
-  public subnet: 10.0.10.0/24
-VPC[1]:
-  CIDR: 10.1.0.0/16
-  private subnet: 10.1.0.0/24
-  public subnet: 10.1.10.0/24
+For instance, if a base CIDR 10.0.0.0/16 was specified and two VPCs are to create, it will create:
+- VPC[0]:
+  - CIDR: 10.0.0.0/16
+  - private subnet: 10.0.0.0/24
+  - public subnet: 10.0.100.0/24
+- VPC[1]:
+  - CIDR: 10.1.0.0/16
+  - private subnet: 10.1.0.0/24
+  - public subnet: 10.1.100.0/24
 
 The number of private and public subnets is also a variable and can be configured. 
 

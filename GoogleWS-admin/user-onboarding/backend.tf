@@ -1,4 +1,8 @@
 terraform {
+  backend "local" {
+    path = "terraform.tfstate"
+  }
+}
   /*
   backend "s3" {
     bucket         = "gws-useronboard-01"
@@ -8,10 +12,6 @@ terraform {
     dynamodb_table = "terraform-locks-gws-useronboard-01"
   }
 */
-  backend "local" {
-    path = "terraform.tfstate"
-  }
-}
 /*
 aws s3  mb --region "us-east-1" s3://gws-useronboard-01
 aws dynamodb create-table --table-name terraform-locks-gws-useronboard-01 \

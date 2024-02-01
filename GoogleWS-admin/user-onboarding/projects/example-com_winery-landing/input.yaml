@@ -1,0 +1,12 @@
+domain: openspacehotels.com
+project: e-car web
+team:
+  - surname: Doe
+    name: John
+    role: Dev
+  - surname: Kong
+    name: Robert
+    role: Dev
+  - surname: Rhode
+    name: Moses
+    role: Manager

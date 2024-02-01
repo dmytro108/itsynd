@@ -1,0 +1,12 @@
+domain: openspacehotels.com
+project: portfolio web
+team:
+  - surname: Smith
+    name: Magnus
+    role: Dev
+  - surname: Shravan
+    name: Robert
+    role: Dev
+  - surname: Ramesh
+    name: Michael
+    role: Manager

@@ -1,3 +1,5 @@
+# This Terraform configuration file defines the provider 
+# block for the "googleworkspace" provider.
 terraform {
   required_providers {
     googleworkspace = {
@@ -10,7 +12,8 @@ terraform {
   }
 }
 
-# Auth method: Admin roles applied directly to a service account
+
+
 provider "googleworkspace" {
   credentials = jsonencode(data.external.sops_secrets.result)
   customer_id = var.googleworkspace_customer_id
@@ -22,6 +25,7 @@ provider "googleworkspace" {
   ]
 }
 
+# This data block retrieves the decrypted secrets using the "sops" program.
 data "external" "sops_secrets" {
   program = ["sops", "--decrypt", "projects/${terraform.workspace}/credentials-encrypted.json"]
 }

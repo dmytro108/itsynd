@@ -12,13 +12,16 @@ terraform {
 
 # Auth method: Admin roles applied directly to a service account
 provider "googleworkspace" {
-  credentials = "${terraform.workspace}/credentials.json"
-  customer_id = "C01hmn5i2"
+  credentials = jsonencode(data.external.sops_secrets.result)
+  customer_id = var.googleworkspace_customer_id
   oauth_scopes = [
     "https://www.googleapis.com/auth/admin.directory.user",
     "https://www.googleapis.com/auth/admin.directory.userschema",
     "https://www.googleapis.com/auth/admin.directory.group",
     "https://www.googleapis.com/auth/apps.groups.settings"
-    # include scopes as needed
   ]
+}
+
+data "external" "sops_secrets" {
+  program = ["sops", "--decrypt", "projects/${terraform.workspace}/credentials-encrypted.json"]
 }

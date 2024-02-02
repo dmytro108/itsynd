@@ -1,8 +1,5 @@
 # ******************************** Common vars
-
-variable "output_template_file" {
-  description = "The template file"
-  type        = string
-  sensitive   = true
+variable "googleworkspace_customer_id" {
+  description = "Google Workspace customer ID, needed for the Google Workspace provider"
+  type = string
 }
-

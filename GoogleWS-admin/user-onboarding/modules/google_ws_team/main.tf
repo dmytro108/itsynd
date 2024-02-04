@@ -1,38 +1,20 @@
-# This file contains the main configuration for the Google Workspace team module.
-# This Terraform module is responsible for onboarding a team of users to Google Workspace.
-# It creates a Google Workspace group for the project, generates a random password for each team member,
-# creates Google Workspace users for each team member, and adds them to the project group.
+/**
+* ## Module: google_ws_team
+* This Terraform module is responsible for onboarding a team of users to Google Workspace.
+* It creates a Google Workspace group for the project, generates a random password for each team member,
+* creates Google Workspace users for each team member, and adds them to the project group.
+* Inputs:
+* - var.team: A list of objects representing team members, each with the following attributes:
+*   - name: The first name of the team member.
+*   - surname: The last name of the team member.
+*   - role: The role of the team member.
+* - var.project_name: The name of the project.
+* - var.domain: The domain for the email addresses.
+* Outputs:
+* - googleworkspace_group.project_group: The created Google Workspace group for the project.
+* - googleworkspace_user.team_members: A map of the created Google Workspace users for each team member.
+*/
 
-# Inputs:
-# - var.team: A list of objects representing team members, each with the following attributes:
-#   - name: The first name of the team member.
-#   - surname: The last name of the team member.
-#   - role: The role of the team member.
-# - var.project_name: The name of the project.
-# - var.domain: The domain for the email addresses.
-
-# Outputs:
-# - googleworkspace_group.project_group: The created Google Workspace group for the project.
-# - googleworkspace_user.team_members: A map of the created Google Workspace users for each team member.
-
-# Example usage:
-# module "google_ws_team" {
-#   source        = "./modules/google_ws_team"
-#   team          = [
-#     {
-#       name    = "John"
-#       surname = "Doe"
-#       role    = "Developer"
-#     },
-#     {
-#       name    = "Jane"
-#       surname = "Smith"
-#       role    = "Designer"
-#     }
-#   ]
-#   project_name  = "My Project"
-#   domain        = "example.com"
-# }
 locals {
 # The team_members_list is a list of strings that combines the name and surname of 
 # each team member. This is used as a iteration parameter (for_each) for resources such as

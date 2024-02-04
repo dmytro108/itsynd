@@ -2,14 +2,12 @@
 variable "domain" {
   description = "E-mail domain"
   type        = string
-  default     = ""
 }
 
 # Name of the project
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default     = ""
 }
 
 # Map of team members
@@ -20,10 +18,5 @@ variable "team" {
     name    = string
     surname = string
   }))
-  default = [{
-    name    = ""
-    role    = ""
-    surname = ""
-  }]
 }
 

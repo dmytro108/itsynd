@@ -2,7 +2,7 @@ formatter: "markdown table"
 
 version: ""
 
-header-from: "docs/header.md"
+header-from: "main.tf"
 footer-from: ""
 
 recursive:
@@ -17,12 +17,14 @@ sections:
     - requirements
     - inputs
     - outputs
-    - modules
 
 content: |-
   {{ .Header }}
-  {{ include "docs/task.md" }}
-  {{ include "docs/solution.md" }}
+  ### Example
+
+  ```hcl
+  {{ include "examples/example-1/main.tf" }}
+  ```
   ### Reference
   {{ .Requirements }}
   {{ .Providers }}
@@ -30,8 +32,6 @@ content: |-
   {{ .Modules }}
   {{ .Outputs }}
   {{ .Resources }}
-  ### Results
-  {{ include "docs/results.md" }}
 
 output:
   file: "README.md"

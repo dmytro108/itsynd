@@ -115,7 +115,7 @@ Create Terraform code that meets these comprehensive specifications, focusing on
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_google_ws_team"></a> [google\_ws\_team](#module\_google\_ws\_team) | ./modules/google_ws_team | n/a |
+| <a name="module_google_ws_team"></a> [google\_ws\_team](modules\google_ws_team) | ./modules/google_ws_team | n/a |
 #### Outputs
 
 No outputs.

@@ -39,4 +39,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+.terraform.lock.hcl
+
+# Ignore Visual Studio Code Folder
+.vscode/
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

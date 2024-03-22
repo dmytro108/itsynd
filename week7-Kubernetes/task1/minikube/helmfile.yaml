@@ -16,8 +16,8 @@ releases:
 - name: django-app
   chart: ./django-app
   version: "0.1.1"
-  namespace: django-app
-  createNamespace: true
+  #namespace: django-app
+  #createNamespace: false
   values:
     - "django-app/values.yaml"
     - "db-values.yaml"    
@@ -32,7 +32,7 @@ releases:
   chart: ./django-app
   version: "0.1.1"
   namespace: django-app2
-  createNamespace: true
+  createNamespace: false
   values:
     - "django-app/values.yaml"
     - "db-values.yaml"   

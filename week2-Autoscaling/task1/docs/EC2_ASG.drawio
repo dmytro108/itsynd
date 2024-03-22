@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="PHC6HiOyRjeXIRx9HdmX" name="Page-1">
-        <mxGraphModel dx="662" dy="485" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1242" dy="659" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -44,7 +44,7 @@
                 </mxCell>
                 <mxCell id="2" parent="0"/>
                 <mxCell id="3" value="&lt;font color=&quot;#000000&quot;&gt;Scalable Node.JS App&lt;/font&gt;" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=30;fontStyle=1;labelBackgroundColor=none;strokeColor=#FFFFFF;" parent="2" vertex="1">
-                    <mxGeometry x="36.5" y="26.5" width="334" height="42" as="geometry"/>
+                    <mxGeometry x="40" y="25" width="334" height="42" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="&lt;font color=&quot;#000000&quot;&gt;Deployment into Docker containers on AWS EC2 ASG&lt;/font&gt;" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=16;labelBackgroundColor=none;strokeColor=#FFFFFF;" parent="2" vertex="1">
                     <mxGeometry x="36.5" y="66.5" width="402" height="25" as="geometry"/>
